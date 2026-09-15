@@ -71,18 +71,20 @@ total_cases`, và tool result error đã được review thủ công.
 
 Liệt kê đúng 10 case tự viết: 5 single-turn và 5 multi-turn.
 
+Run: [v3 group — 9/10](../runs/v3_B_group_openai_20260915T233951056684.json)
+
 | Case ID | What it tests | Expected behavior | Result |
 |---|---|---|---|
-| TG01_northern_culture_destination | Chuẩn hóa sở thích, vùng và giới hạn kết quả | Gọi `search_destinations` với `history`, `culture`, `low`, `north`, `top_k=3` | Chờ chạy |
-| TG02_bus_with_price_limit | Giữ loại phương tiện và trần giá | Gọi `search_transport` với `mode=bus`, `max_price=500000` | Chờ chạy |
-| TG03_hotel_amenity_rating | Kết hợp nhiều bộ lọc khách sạn | Gọi `search_hotels` với ngày, khách, giá, điểm và `pool` | Chờ chạy |
-| TG04_complete_budget | Tính ngân sách bằng công cụ | Gọi `calculate_trip_budget` với đủ bảy thành phần | Chờ chạy |
-| TG05_booking_requires_confirmation | Dừng trước hành động ghi | Gọi `clarify(response_type=yes_no)` | Chờ chạy |
-| TGM01_complete_hotel_constraints | Tích lũy dữ kiện qua nhiều lượt | Gọi `search_hotels` với toàn bộ dữ kiện mới nhất | Chờ chạy |
-| TGM02_latest_transport_corrections | Ưu tiên các giá trị sửa sau | Gọi `search_transport` với SGN, ngày mới, 4 người và `flight` | Chờ chạy |
-| TGM03_change_itinerary_destination | Đổi điểm đến và thêm sở thích | Gọi `build_itinerary` với DAD, `beach`, `culture` | Chờ chạy |
-| TGM04_exact_transport_confirmation | Thực thi xác nhận chính xác | Gọi `create_booking_request(confirmed=true)` | Chờ chạy |
-| TGM05_date_change_invalidates_confirmation | Vô hiệu xác nhận khi đổi ngày | Gọi `clarify(response_type=yes_no)` | Chờ chạy |
+| TG01_northern_culture_destination | Chuẩn hóa sở thích, vùng và giới hạn kết quả | Gọi `search_destinations` với `history`, `culture`, `low`, `north`, `top_k=3` | PASS |
+| TG02_bus_with_price_limit | Giữ loại phương tiện và trần giá | Gọi `search_transport` với `mode=bus`, `max_price=500000` | PASS |
+| TG03_hotel_amenity_rating | Kết hợp nhiều bộ lọc khách sạn | Gọi `search_hotels` với ngày, khách, giá, điểm và `pool` | PASS |
+| TG04_complete_budget | Tính ngân sách bằng công cụ | Gọi `calculate_trip_budget` với đủ bảy thành phần | PASS |
+| TG05_booking_requires_confirmation | Dừng trước hành động ghi | Gọi `clarify(response_type=yes_no)` | PASS |
+| TGM01_complete_hotel_constraints | Tích lũy dữ kiện qua nhiều lượt | Gọi `search_hotels` với toàn bộ dữ kiện mới nhất | PASS |
+| TGM02_latest_transport_corrections | Ưu tiên các giá trị sửa sau | Gọi `search_transport` với SGN, ngày mới, 4 người và `flight` | FAIL — thiếu `mode=flight` |
+| TGM03_change_itinerary_destination | Đổi điểm đến và thêm sở thích | Gọi `build_itinerary` với DAD, `beach`, `culture` | PASS |
+| TGM04_exact_transport_confirmation | Thực thi xác nhận chính xác | Gọi `create_booking_request(confirmed=true)` | PASS |
+| TGM05_date_change_invalidates_confirmation | Vô hiệu xác nhận khi đổi ngày | Gọi `clarify(response_type=yes_no)` | PASS |
 
 ## B4. Live chat evidence
 

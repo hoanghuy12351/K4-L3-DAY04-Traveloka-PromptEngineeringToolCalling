@@ -184,3 +184,26 @@ conversation.
   the payload that was confirmed. Any difference requires a new yes/no
   confirmation; only an exact current-payload confirmation permits
   `confirmed=true`.
+
+## V3 mandatory booking-confirmation gate
+
+This gate has priority over every request to create a booking, including a
+request to reuse an earlier confirmation.
+
+1. Define the current booking payload as the exact tuple
+   (`booking_type`, `option_id`, `start_date`, `end_date` when required,
+   `travelers`) after applying all corrections from the conversation.
+2. Locate the most recent turn that changed any field in that tuple. Then
+   locate the most recent explicit confirmation of that exact tuple.
+3. A confirmation is valid only when it occurs after the most recent payload
+   change and refers to every current value. Confirmation of option A never
+   authorizes option B, even when every other field is unchanged.
+4. A request to use an old confirmation after a payload change is not a new
+   confirmation. In that situation, call only `clarify` with
+   `response_type="yes_no"`; do not call `create_booking_request` in the same
+   turn.
+5. Call `create_booking_request` with `confirmed=true` only when the latest
+   user turn explicitly confirms the unchanged complete payload. A phrase
+   such as "I confirm the exact details just stated" is valid only when the
+   immediately preceding details contain the complete current payload and no
+   later correction exists.

@@ -1,0 +1,121 @@
+run_id,version,artifact_version,suite,case_id,is_multiturn,case_failure_type,observed_mismatch,expected_tool,actual_tool,passed,routing_correct,args_correct,failures
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T01_destination_by_interest,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T02_transport_search,False,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T03_hotel_price_filter,False,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T04_attraction_interest,False,wrong_arg_value,,search_attractions,search_attractions,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T05_budget_calculation,False,wrong_arg_value,,calculate_trip_budget,calculate_trip_budget,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T06_build_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T07_missing_destination,False,missing_info,,clarify,clarify,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T08_missing_origin,False,missing_info,missing_tool_call,clarify,search_transport,False,False,False,missing tool call clarify; extra tool call search_transport
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T09_missing_hotel_dates,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T10_confirm_before_booking,False,wrong_boundary,,clarify,clarify,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T11_explicit_booking_confirmation,False,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T12_out_of_scope_cooking,False,out_of_scope,,no_tool,,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T13_meta_no_tool,False,unnecessary_tool,,no_tool,,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T14_parallel_trip_search,False,wrong_tool,wrong_arg_value,search_transport|search_hotels|search_attractions,search_transport|search_hotels|search_attractions,False,True,False,"mode: expected 'flight', got None"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T15_compare_transport_modes,False,wrong_tool,,search_transport|search_transport,search_transport|search_transport,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T16_family_itinerary,False,wrong_arg_value,wrong_arg_value,build_itinerary,build_itinerary,False,True,False,"interests: expected ['beach', 'nature'], got ['biển', 'thiên nhiên']"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T17_unsupported_live_claim,False,out_of_scope,,no_tool,,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T18_ambiguous_budget,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T19_missing_booking_option,False,missing_info,,clarify,clarify,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,T20_two_destination_recommendations,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM01_fill_missing_destination,True,missing_info,,build_itinerary,build_itinerary,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM02_carry_dates_change_destination,True,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM03_correct_origin,True,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM04_update_itinerary_budget,True,wrong_arg_value,wrong_arg_value,build_itinerary,build_itinerary,False,True,False,"interests: expected ['beach', 'culture'], got ['biển', 'văn hóa']"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM05_review_before_booking,True,wrong_boundary,,clarify,clarify,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM06_confirmation_invalidated,True,wrong_boundary,missing_tool_call,clarify,create_booking_request,False,False,False,missing tool call clarify; extra tool call create_booking_request
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM07_cancel_previous_action,True,unnecessary_tool,,no_tool,,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM08_switch_from_hotel_to_attractions,True,wrong_tool,wrong_arg_value,search_attractions,search_attractions|search_attractions,False,False,False,"interests: expected ['history', 'food'], got ['lịch sử']; extra tool call search_attractions"
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM09_latest_intent_wins,True,wrong_tool,,search_transport,search_transport,True,True,True,
+v0_B_base_openai_20260915T200022454664,v0,v0+p086e367f9e8b+t656f3a8918c3,base,TM10_execute_exact_confirmed_booking,True,wrong_boundary,wrong_arg_value,create_booking_request,create_booking_request,False,True,False,"option_id: expected 'TR-SGN-PQC-F01', got 'F01'"
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T01_destination_by_interest,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T02_transport_search,False,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T03_hotel_price_filter,False,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T04_attraction_interest,False,wrong_arg_value,extra_tool_call,search_attractions,search_attractions|search_attractions|search_attractions,False,False,False,extra tool call search_attractions; extra tool call search_attractions
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T05_budget_calculation,False,wrong_arg_value,,calculate_trip_budget,calculate_trip_budget,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T06_build_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T07_missing_destination,False,missing_info,,clarify,clarify,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T08_missing_origin,False,missing_info,missing_tool_call,clarify,search_transport,False,False,False,missing tool call clarify; extra tool call search_transport
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T09_missing_hotel_dates,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T10_confirm_before_booking,False,wrong_boundary,,clarify,clarify,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T11_explicit_booking_confirmation,False,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T12_out_of_scope_cooking,False,out_of_scope,,no_tool,,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T13_meta_no_tool,False,unnecessary_tool,,no_tool,,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T14_parallel_trip_search,False,wrong_tool,wrong_arg_value,search_transport|search_hotels|search_attractions,search_transport|search_hotels|search_attractions,False,True,False,"mode: expected 'flight', got None"
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T15_compare_transport_modes,False,wrong_tool,,search_transport|search_transport,search_transport|search_transport,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T16_family_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T17_unsupported_live_claim,False,out_of_scope,,no_tool,,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T18_ambiguous_budget,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T19_missing_booking_option,False,missing_info,,clarify,clarify,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,T20_two_destination_recommendations,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM01_fill_missing_destination,True,missing_info,,build_itinerary,build_itinerary,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM02_carry_dates_change_destination,True,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM03_correct_origin,True,wrong_arg_value,,search_transport,search_transport,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM04_update_itinerary_budget,True,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM05_review_before_booking,True,wrong_boundary,,clarify,clarify,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM06_confirmation_invalidated,True,wrong_boundary,missing_tool_call,clarify,create_booking_request,False,False,False,missing tool call clarify; extra tool call create_booking_request
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM07_cancel_previous_action,True,unnecessary_tool,,no_tool,,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM08_switch_from_hotel_to_attractions,True,wrong_tool,,search_attractions,search_attractions,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM09_latest_intent_wins,True,wrong_tool,,search_transport,search_transport,True,True,True,
+v1_B_base_openai_20260915T200611852550,v1,v1+p086e367f9e8b+t080ff8930e75,base,TM10_execute_exact_confirmed_booking,True,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T01_destination_by_interest,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T02_transport_search,False,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T03_hotel_price_filter,False,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T04_attraction_interest,False,wrong_arg_value,extra_tool_call,search_attractions,search_attractions|search_attractions,False,False,False,extra tool call search_attractions
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T05_budget_calculation,False,wrong_arg_value,,calculate_trip_budget,calculate_trip_budget,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T06_build_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T07_missing_destination,False,missing_info,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T08_missing_origin,False,missing_info,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T09_missing_hotel_dates,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T10_confirm_before_booking,False,wrong_boundary,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T11_explicit_booking_confirmation,False,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T12_out_of_scope_cooking,False,out_of_scope,,no_tool,,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T13_meta_no_tool,False,unnecessary_tool,,no_tool,,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T14_parallel_trip_search,False,wrong_tool,wrong_arg_value,search_transport|search_hotels|search_attractions,search_transport|search_hotels|search_attractions,False,True,False,"mode: expected 'flight', got None"
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T15_compare_transport_modes,False,wrong_tool,,search_transport|search_transport,search_transport|search_transport,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T16_family_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T17_unsupported_live_claim,False,out_of_scope,,no_tool,,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T18_ambiguous_budget,False,missing_info,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T19_missing_booking_option,False,missing_info,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,T20_two_destination_recommendations,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM01_fill_missing_destination,True,missing_info,,build_itinerary,build_itinerary,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM02_carry_dates_change_destination,True,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM03_correct_origin,True,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM04_update_itinerary_budget,True,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM05_review_before_booking,True,wrong_boundary,,clarify,clarify,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM06_confirmation_invalidated,True,wrong_boundary,missing_tool_call,clarify,create_booking_request,False,False,False,missing tool call clarify; extra tool call create_booking_request
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM07_cancel_previous_action,True,unnecessary_tool,,no_tool,,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM08_switch_from_hotel_to_attractions,True,wrong_tool,,search_attractions,search_attractions,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM09_latest_intent_wins,True,wrong_tool,,search_transport,search_transport,True,True,True,
+v2_B_base_openai_20260915T203336478715,v2,v2+p654e82f17753+t080ff8930e75,base,TM10_execute_exact_confirmed_booking,True,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T01_destination_by_interest,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T02_transport_search,False,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T03_hotel_price_filter,False,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T04_attraction_interest,False,wrong_arg_value,,search_attractions,search_attractions,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T05_budget_calculation,False,wrong_arg_value,,calculate_trip_budget,calculate_trip_budget,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T06_build_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T07_missing_destination,False,missing_info,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T08_missing_origin,False,missing_info,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T09_missing_hotel_dates,False,missing_info,missing_tool_call,clarify,search_hotels,False,False,False,missing tool call clarify; extra tool call search_hotels
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T10_confirm_before_booking,False,wrong_boundary,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T11_explicit_booking_confirmation,False,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T12_out_of_scope_cooking,False,out_of_scope,,no_tool,,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T13_meta_no_tool,False,unnecessary_tool,,no_tool,,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T14_parallel_trip_search,False,wrong_tool,wrong_arg_value,search_transport|search_hotels|search_attractions,search_transport|search_hotels|search_attractions,False,True,False,"destination: expected 'DAD', got 'DLI'; mode: expected 'flight', got None; destination: expected 'DAD', got 'DLI'; destination: expected 'DAD', got 'DLI'"
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T15_compare_transport_modes,False,wrong_tool,,search_transport|search_transport,search_transport|search_transport,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T16_family_itinerary,False,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T17_unsupported_live_claim,False,out_of_scope,,no_tool,,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T18_ambiguous_budget,False,missing_info,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T19_missing_booking_option,False,missing_info,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,T20_two_destination_recommendations,False,wrong_arg_value,,search_destinations,search_destinations,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM01_fill_missing_destination,True,missing_info,,build_itinerary,build_itinerary,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM02_carry_dates_change_destination,True,wrong_arg_value,,search_hotels,search_hotels,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM03_correct_origin,True,wrong_arg_value,wrong_arg_value,search_transport,search_transport,False,True,False,"mode: expected 'flight', got None"
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM04_update_itinerary_budget,True,wrong_arg_value,,build_itinerary,build_itinerary,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM05_review_before_booking,True,wrong_boundary,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM06_confirmation_invalidated,True,wrong_boundary,,clarify,clarify,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM07_cancel_previous_action,True,unnecessary_tool,,no_tool,,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM08_switch_from_hotel_to_attractions,True,wrong_tool,,search_attractions,search_attractions,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM09_latest_intent_wins,True,wrong_tool,,search_transport,search_transport,True,True,True,
+v3_B_base_openai_20260915T204706735881,v3,v3+p6850ec08cdb5+t080ff8930e75,base,TM10_execute_exact_confirmed_booking,True,wrong_boundary,,create_booking_request,create_booking_request,True,True,True,

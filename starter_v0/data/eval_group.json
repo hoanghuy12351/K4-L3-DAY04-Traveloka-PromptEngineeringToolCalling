@@ -1,7 +1,118 @@
 {
-  "dataset_id": "day04_v3_helpdesk_group",
+  "dataset_id": "day04_v3_travel_group",
   "dataset_role": "group",
-  "description": "Template intentionally left empty. The team must write exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
+  "description": "Ten original Travel Planner evaluation cases written by the team: five single-turn and five multi-turn cases.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "TG01_northern_culture_destination",
+      "phase": "B",
+      "suite": "group",
+      "query": "Gợi ý tối đa 3 điểm đến miền Bắc, ngân sách thấp, phù hợp khám phá lịch sử và văn hóa.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "search_destinations", "args": {"interests": ["history", "culture"], "budget_level": "low", "region": "north", "top_k": 3}}]},
+      "metadata": {"skill": "destination_filters", "difficulty": "medium", "what_it_tests": "Chuẩn hóa sở thích, vùng, ngân sách và giới hạn kết quả trong một lời gọi."}
+    },
+    {
+      "id": "TG02_bus_with_price_limit",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm xe khách từ Đà Nẵng đến Đà Lạt ngày 2026-11-20 cho 3 người, giá tối đa 500000 đồng mỗi người.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "search_transport", "args": {"origin": "DAD", "destination": "DLI", "travel_date": "2026-11-20", "passengers": 3, "mode": "bus", "max_price": 500000}}]},
+      "metadata": {"skill": "transport_constraints", "difficulty": "medium", "what_it_tests": "Giữ đầy đủ loại phương tiện, ngày, số người và trần giá."}
+    },
+    {
+      "id": "TG03_hotel_amenity_rating",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tìm khách sạn ở Phú Quốc từ 2026-12-05 đến 2026-12-08 cho 2 khách, tối đa 2500000 đồng mỗi đêm, điểm từ 4.5 và có tiện ích pool.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "search_hotels", "args": {"destination": "PQC", "check_in": "2026-12-05", "check_out": "2026-12-08", "guests": 2, "max_price_per_night": 2500000, "min_rating": 4.5, "amenities": ["pool"]}}]},
+      "metadata": {"skill": "hotel_filters", "difficulty": "medium", "what_it_tests": "Truyền đồng thời ngày, khách, giá, điểm và tiện ích khách sạn."}
+    },
+    {
+      "id": "TG04_complete_budget",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tính ngân sách chuyến 4 ngày 3 đêm cho 3 người: phương tiện 1800000 mỗi người, phòng 1400000 mỗi đêm, tham quan 600000 mỗi người và ăn uống 450000 mỗi người mỗi ngày.",
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "calculate_trip_budget", "args": {"transport_cost_per_person": 1800000, "hotel_price_per_night": 1400000, "nights": 3, "attraction_cost_per_person": 600000, "daily_food_cost_per_person": 450000, "days": 4, "travelers": 3}}]},
+      "metadata": {"skill": "budget_calculation", "difficulty": "medium", "what_it_tests": "Dùng công cụ tính ngân sách với đủ bảy thành phần, không tự tính."}
+    },
+    {
+      "id": "TG05_booking_requires_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tạo yêu cầu đặt HT-PQC-01 từ 2026-12-05 đến 2026-12-08 cho 2 người; tôi chưa xác nhận nội dung này.",
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "booking_confirmation", "difficulty": "hard", "what_it_tests": "Dừng ở bước xác nhận khi người dùng nói rõ chưa xác nhận."}
+    },
+    {
+      "id": "TGM01_complete_hotel_constraints",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm khách sạn ở Đà Lạt cho 2 người."},
+        {"role": "user", "content": "Nhận phòng 2026-11-15, trả phòng 2026-11-18, tối đa 1500000 đồng mỗi đêm."},
+        {"role": "user", "content": "Thêm yêu cầu có wifi rồi tìm giúp tôi."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "search_hotels", "args": {"destination": "DLI", "check_in": "2026-11-15", "check_out": "2026-11-18", "guests": 2, "max_price_per_night": 1500000, "amenities": ["wifi"]}}]},
+      "metadata": {"skill": "multiturn_constraint_completion", "difficulty": "hard", "what_it_tests": "Tích lũy trường bắt buộc và bộ lọc qua ba lượt."}
+    },
+    {
+      "id": "TGM02_latest_transport_corrections",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tìm chuyến bay từ Hà Nội đến Đà Nẵng ngày 2026-10-21 cho 2 người."},
+        {"role": "user", "content": "Sửa điểm đi thành TP. Hồ Chí Minh."},
+        {"role": "user", "content": "Sửa tiếp ngày đi thành 2026-10-22 và số hành khách thành 4 rồi tìm."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "search_transport", "args": {"origin": "SGN", "destination": "DAD", "travel_date": "2026-10-22", "passengers": 4, "mode": "flight"}}]},
+      "metadata": {"skill": "multiturn_latest_values", "difficulty": "hard", "what_it_tests": "Giá trị sửa mới nhất phải thay điểm đi, ngày và số hành khách cũ."}
+    },
+    {
+      "id": "TGM03_change_itinerary_destination",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Lập lịch trình Phú Quốc 4 ngày từ 2026-12-05 cho 2 người, thích biển."},
+        {"role": "user", "content": "Đổi điểm đến thành Đà Nẵng."},
+        {"role": "user", "content": "Thêm sở thích văn hóa và tạo lịch trình mới."}
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {"tool_calls": [{"name": "build_itinerary", "args": {"destination": "DAD", "start_date": "2026-12-05", "days": 4, "travelers": 2, "interests": ["beach", "culture"]}}]},
+      "metadata": {"skill": "multiturn_itinerary_update", "difficulty": "hard", "what_it_tests": "Đổi điểm đến nhưng vẫn giữ ngày, số ngày, số người và bổ sung sở thích."}
+    },
+    {
+      "id": "TGM04_exact_transport_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tôi muốn đặt chuyến TR-HAN-DAD-F01 ngày 2026-10-21 cho 3 người."},
+        {"role": "user", "content": "Nhắc lại giúp tôi: TR-HAN-DAD-F01, ngày 2026-10-21, 3 người."},
+        {"role": "user", "content": "Đúng, tôi xác nhận chính xác nội dung vừa nêu; hãy tạo yêu cầu."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "create_booking_request", "args": {"booking_type": "transport", "option_id": "TR-HAN-DAD-F01", "start_date": "2026-10-21", "travelers": 3, "confirmed": true}}]},
+      "metadata": {"skill": "multiturn_exact_confirmation", "difficulty": "hard", "what_it_tests": "Xác nhận rõ payload không đổi cho phép tạo yêu cầu mô phỏng."}
+    },
+    {
+      "id": "TGM05_date_change_invalidates_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tôi xác nhận đặt HT-PQC-01 từ 2026-12-05 đến 2026-12-08 cho 2 người."},
+        {"role": "user", "content": "Đổi ngày trả phòng thành 2026-12-09."},
+        {"role": "user", "content": "Dùng xác nhận cũ để tạo yêu cầu với ngày mới."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {"tool_calls": [{"name": "clarify", "args": {"response_type": "yes_no"}}]},
+      "metadata": {"skill": "multiturn_confirmation_invalidation", "difficulty": "hard", "what_it_tests": "Thay đổi ngày sau xác nhận bắt buộc phải xác nhận lại."}
+    }
+  ]
 }

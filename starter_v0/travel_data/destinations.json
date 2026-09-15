@@ -1,0 +1,59 @@
+{
+  "dataset_id": "travel_planner_mock_destinations_v1",
+  "fictional": true,
+  "currency": "VND",
+  "notice": "All descriptions and costs are deterministic classroom data, not live travel advice.",
+  "destinations": [
+    {
+      "code": "HAN",
+      "city": "Hà Nội",
+      "region": "north",
+      "recommended_days": [3, 5],
+      "budget_levels": ["low", "medium", "high"],
+      "interests": ["culture", "food", "history", "city"],
+      "estimated_daily_local_cost": 850000,
+      "summary": "Phù hợp khám phá phố cổ, ẩm thực và di sản đô thị."
+    },
+    {
+      "code": "SGN",
+      "city": "TP. Hồ Chí Minh",
+      "region": "south",
+      "recommended_days": [3, 5],
+      "budget_levels": ["low", "medium", "high"],
+      "interests": ["food", "history", "nightlife", "city"],
+      "estimated_daily_local_cost": 950000,
+      "summary": "Phù hợp trải nghiệm đô thị, ẩm thực và lịch sử."
+    },
+    {
+      "code": "DAD",
+      "city": "Đà Nẵng",
+      "region": "central",
+      "recommended_days": [3, 5],
+      "budget_levels": ["medium", "high"],
+      "interests": ["beach", "food", "culture", "family"],
+      "estimated_daily_local_cost": 1050000,
+      "summary": "Phù hợp nghỉ biển, gia đình và khám phá miền Trung."
+    },
+    {
+      "code": "DLI",
+      "city": "Đà Lạt",
+      "region": "central_highlands",
+      "recommended_days": [3, 4],
+      "budget_levels": ["low", "medium"],
+      "interests": ["nature", "food", "photography", "relaxation"],
+      "estimated_daily_local_cost": 750000,
+      "summary": "Phù hợp thiên nhiên, nghỉ dưỡng và chụp ảnh."
+    },
+    {
+      "code": "PQC",
+      "city": "Phú Quốc",
+      "region": "south",
+      "recommended_days": [4, 6],
+      "budget_levels": ["medium", "high"],
+      "interests": ["beach", "nature", "family", "relaxation"],
+      "estimated_daily_local_cost": 1350000,
+      "summary": "Phù hợp nghỉ biển, thiên nhiên và gia đình."
+    }
+  ]
+}
+

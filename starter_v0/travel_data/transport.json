@@ -1,0 +1,20 @@
+{
+  "dataset_id": "travel_planner_mock_transport_v1",
+  "fictional": true,
+  "currency": "VND",
+  "price_basis": "per_person_one_way",
+  "notice": "Schedules, option IDs, prices, and seats are fictional.",
+  "options": [
+    {"option_id": "TR-HAN-DAD-F01", "origin": "HAN", "destination": "DAD", "mode": "flight", "depart_time": "08:00", "duration_minutes": 85, "price": 1450000, "seats": 8},
+    {"option_id": "TR-HAN-DAD-T01", "origin": "HAN", "destination": "DAD", "mode": "train", "depart_time": "19:30", "duration_minutes": 960, "price": 820000, "seats": 16},
+    {"option_id": "TR-SGN-DAD-F01", "origin": "SGN", "destination": "DAD", "mode": "flight", "depart_time": "09:15", "duration_minutes": 80, "price": 1350000, "seats": 10},
+    {"option_id": "TR-SGN-DAD-B01", "origin": "SGN", "destination": "DAD", "mode": "bus", "depart_time": "18:00", "duration_minutes": 1020, "price": 520000, "seats": 20},
+    {"option_id": "TR-SGN-DLI-B01", "origin": "SGN", "destination": "DLI", "mode": "bus", "depart_time": "07:00", "duration_minutes": 420, "price": 320000, "seats": 18},
+    {"option_id": "TR-SGN-DLI-F01", "origin": "SGN", "destination": "DLI", "mode": "flight", "depart_time": "11:10", "duration_minutes": 55, "price": 1150000, "seats": 6},
+    {"option_id": "TR-HAN-DLI-F01", "origin": "HAN", "destination": "DLI", "mode": "flight", "depart_time": "10:20", "duration_minutes": 110, "price": 1750000, "seats": 7},
+    {"option_id": "TR-HAN-PQC-F01", "origin": "HAN", "destination": "PQC", "mode": "flight", "depart_time": "07:45", "duration_minutes": 130, "price": 2300000, "seats": 9},
+    {"option_id": "TR-SGN-PQC-F01", "origin": "SGN", "destination": "PQC", "mode": "flight", "depart_time": "13:30", "duration_minutes": 60, "price": 1250000, "seats": 12},
+    {"option_id": "TR-DAD-HAN-F01", "origin": "DAD", "destination": "HAN", "mode": "flight", "depart_time": "16:00", "duration_minutes": 85, "price": 1500000, "seats": 11}
+  ]
+}
+

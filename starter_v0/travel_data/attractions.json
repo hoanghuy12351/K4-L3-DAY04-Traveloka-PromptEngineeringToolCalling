@@ -1,0 +1,24 @@
+{
+  "dataset_id": "travel_planner_mock_attractions_v1",
+  "fictional": true,
+  "currency": "VND",
+  "notice": "Attraction records and opening details are fictional classroom data.",
+  "attractions": [
+    {"attraction_id": "AT-HAN-01", "destination": "HAN", "name": "Phố cổ mô phỏng", "interests": ["culture", "food", "history"], "duration_hours": 3, "price": 0},
+    {"attraction_id": "AT-HAN-02", "destination": "HAN", "name": "Bảo tàng Lịch sử Demo", "interests": ["history", "culture"], "duration_hours": 2, "price": 60000},
+    {"attraction_id": "AT-HAN-03", "destination": "HAN", "name": "Tour ẩm thực Sample", "interests": ["food"], "duration_hours": 3, "price": 450000},
+    {"attraction_id": "AT-SGN-01", "destination": "SGN", "name": "Bảo tàng Thành phố Demo", "interests": ["history", "culture"], "duration_hours": 2, "price": 50000},
+    {"attraction_id": "AT-SGN-02", "destination": "SGN", "name": "Chợ ẩm thực mô phỏng", "interests": ["food", "city"], "duration_hours": 2, "price": 200000},
+    {"attraction_id": "AT-SGN-03", "destination": "SGN", "name": "Phố đêm Sample", "interests": ["nightlife", "city"], "duration_hours": 3, "price": 150000},
+    {"attraction_id": "AT-DAD-01", "destination": "DAD", "name": "Bãi biển Mỹ Khê Demo", "interests": ["beach", "family", "relaxation"], "duration_hours": 4, "price": 0},
+    {"attraction_id": "AT-DAD-02", "destination": "DAD", "name": "Bảo tàng Chăm Sample", "interests": ["culture", "history"], "duration_hours": 2, "price": 70000},
+    {"attraction_id": "AT-DAD-03", "destination": "DAD", "name": "Tour bán đảo mô phỏng", "interests": ["nature", "family"], "duration_hours": 5, "price": 550000},
+    {"attraction_id": "AT-DLI-01", "destination": "DLI", "name": "Vườn hoa Demo", "interests": ["nature", "photography"], "duration_hours": 2, "price": 100000},
+    {"attraction_id": "AT-DLI-02", "destination": "DLI", "name": "Đồi thông Sample", "interests": ["nature", "relaxation", "photography"], "duration_hours": 3, "price": 0},
+    {"attraction_id": "AT-DLI-03", "destination": "DLI", "name": "Workshop cà phê mô phỏng", "interests": ["food", "culture"], "duration_hours": 2, "price": 300000},
+    {"attraction_id": "AT-PQC-01", "destination": "PQC", "name": "Bãi biển Sample", "interests": ["beach", "relaxation", "family"], "duration_hours": 4, "price": 0},
+    {"attraction_id": "AT-PQC-02", "destination": "PQC", "name": "Tour rừng Demo", "interests": ["nature", "family"], "duration_hours": 5, "price": 600000},
+    {"attraction_id": "AT-PQC-03", "destination": "PQC", "name": "Chợ đêm mô phỏng", "interests": ["food", "nightlife"], "duration_hours": 3, "price": 250000}
+  ]
+}
+

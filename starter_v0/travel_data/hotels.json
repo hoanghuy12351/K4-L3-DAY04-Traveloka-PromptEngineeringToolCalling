@@ -1,0 +1,20 @@
+{
+  "dataset_id": "travel_planner_mock_hotels_v1",
+  "fictional": true,
+  "currency": "VND",
+  "price_basis": "per_room_per_night",
+  "notice": "Hotel names, availability, ratings, and prices are fictional.",
+  "hotels": [
+    {"hotel_id": "HT-HAN-01", "destination": "HAN", "name": "Hồ Gươm Mock Hotel", "price_per_night": 950000, "max_guests": 2, "rating": 4.1, "amenities": ["wifi", "breakfast"], "available": true},
+    {"hotel_id": "HT-HAN-02", "destination": "HAN", "name": "Thăng Long Demo Stay", "price_per_night": 1650000, "max_guests": 3, "rating": 4.5, "amenities": ["wifi", "breakfast", "gym"], "available": true},
+    {"hotel_id": "HT-SGN-01", "destination": "SGN", "name": "Bến Thành Sample Inn", "price_per_night": 1050000, "max_guests": 2, "rating": 4.0, "amenities": ["wifi", "workspace"], "available": true},
+    {"hotel_id": "HT-SGN-02", "destination": "SGN", "name": "Sài Gòn Mock Riverside", "price_per_night": 1900000, "max_guests": 4, "rating": 4.6, "amenities": ["wifi", "breakfast", "pool"], "available": true},
+    {"hotel_id": "HT-DAD-01", "destination": "DAD", "name": "Mỹ Khê Demo Hotel", "price_per_night": 1200000, "max_guests": 2, "rating": 4.3, "amenities": ["wifi", "breakfast", "beach_access"], "available": true},
+    {"hotel_id": "HT-DAD-02", "destination": "DAD", "name": "Sông Hàn Mock Resort", "price_per_night": 2100000, "max_guests": 4, "rating": 4.7, "amenities": ["wifi", "pool", "airport_shuttle"], "available": true},
+    {"hotel_id": "HT-DLI-01", "destination": "DLI", "name": "Đồi Thông Sample House", "price_per_night": 780000, "max_guests": 2, "rating": 4.2, "amenities": ["wifi", "garden"], "available": true},
+    {"hotel_id": "HT-DLI-02", "destination": "DLI", "name": "Hồ Xuân Hương Demo Stay", "price_per_night": 1350000, "max_guests": 3, "rating": 4.5, "amenities": ["wifi", "breakfast", "lake_view"], "available": true},
+    {"hotel_id": "HT-PQC-01", "destination": "PQC", "name": "Bãi Dài Mock Bungalow", "price_per_night": 1450000, "max_guests": 2, "rating": 4.3, "amenities": ["wifi", "breakfast", "beach_access"], "available": true},
+    {"hotel_id": "HT-PQC-02", "destination": "PQC", "name": "Hoàng Hôn Demo Resort", "price_per_night": 2750000, "max_guests": 4, "rating": 4.8, "amenities": ["wifi", "pool", "beach_access"], "available": false}
+  ]
+}
+

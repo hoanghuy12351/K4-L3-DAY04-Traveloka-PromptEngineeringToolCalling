@@ -1,0 +1,2198 @@
+{
+  "run_id": "v0_B_base_gemini_20260915T194703771435",
+  "version": "v0",
+  "artifact_version": "v0+p086e367f9e8b+t656f3a8918c3",
+  "prompt_hash": "086e367f9e8b017e0a0c354d6ac34f2e5343573d94404b12999e57581428b7c9",
+  "tools_hash": "656f3a8918c39559cc384ded3f98dbf5160d91a22bd96d32c95cf2218ed20662",
+  "phase": "B",
+  "suite": "base",
+  "provider": "gemini",
+  "model": "gemini-3.5-flash",
+  "system_prompt": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "starter_v0\\data\\eval_travel_base.json",
+  "dataset_id": "day04_v1_travel_planner_base",
+  "dataset_role": "base",
+  "description": "Fixed base evaluation for the fictional AI Travel Planner: 20 single-turn and 10 multi-turn cases. Freeze this file before v0 and do not edit prompts, expectations, or arguments to improve scores.",
+  "generated_at": "2026-09-15T19:47:03",
+  "summary": {
+    "total_cases": 30,
+    "measured_cases": 17,
+    "provider_error_cases": 13,
+    "passed_cases": 16,
+    "case_accuracy": 0.9412,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 0.9412,
+    "multiturn_accuracy": 1.0,
+    "failure_counts": {
+      "missing_info": 1
+    },
+    "observed_mismatch_counts": {
+      "wrong_arg_value": 1
+    }
+  },
+  "results": [
+    {
+      "id": "T01_destination_by_interest",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "destination_recommendation",
+        "difficulty": "medium",
+        "what_it_tests": "Chọn công cụ gợi ý điểm đến và trích đúng sở thích, mức ngân sách."
+      },
+      "input": "Gợi ý điểm đến trong nước mức ngân sách trung bình, ưu tiên biển và phù hợp gia đình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_destinations",
+            "args": {
+              "interests": [
+                "beach",
+                "family"
+              ],
+              "budget_level": "medium"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_destinations",
+            "args": {
+              "interests": [
+                "beach",
+                "family"
+              ],
+              "budget_level": "medium"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_destinations",
+          "args": {
+            "interests": [
+              "beach",
+              "family"
+            ],
+            "budget_level": "medium"
+          },
+          "result": {
+            "tool": "search_destinations",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "results": [
+              {
+                "code": "DAD",
+                "city": "Đà Nẵng",
+                "region": "central",
+                "recommended_days": [
+                  3,
+                  5
+                ],
+                "budget_levels": [
+                  "medium",
+                  "high"
+                ],
+                "interests": [
+                  "beach",
+                  "food",
+                  "culture",
+                  "family"
+                ],
+                "estimated_daily_local_cost": 1050000,
+                "summary": "Phù hợp nghỉ biển, gia đình và khám phá miền Trung."
+              },
+              {
+                "code": "PQC",
+                "city": "Phú Quốc",
+                "region": "south",
+                "recommended_days": [
+                  4,
+                  6
+                ],
+                "budget_levels": [
+                  "medium",
+                  "high"
+                ],
+                "interests": [
+                  "beach",
+                  "nature",
+                  "family",
+                  "relaxation"
+                ],
+                "estimated_daily_local_cost": 1350000,
+                "summary": "Phù hợp nghỉ biển, thiên nhiên và gia đình."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "T02_transport_search",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "transport_search",
+        "difficulty": "easy",
+        "what_it_tests": "Chuẩn hóa thành phố thành mã và giữ đúng ngày, số khách, phương tiện."
+      },
+      "input": "Tìm chuyến bay từ Hà Nội đến Đà Nẵng ngày 2026-10-10 cho 2 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "HAN",
+              "destination": "DAD",
+              "travel_date": "2026-10-10",
+              "passengers": 2,
+              "mode": "flight"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "mode": "flight",
+              "travel_date": "2026-10-10",
+              "origin": "HAN",
+              "destination": "DAD",
+              "passengers": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_transport",
+          "args": {
+            "mode": "flight",
+            "travel_date": "2026-10-10",
+            "origin": "HAN",
+            "destination": "DAD",
+            "passengers": 2
+          },
+          "result": {
+            "tool": "search_transport",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "travel_date": "2026-10-10",
+            "notice": "The date is request context; this static mock data has no date-specific inventory.",
+            "results": [
+              {
+                "option_id": "TR-HAN-DAD-F01",
+                "origin": "HAN",
+                "destination": "DAD",
+                "mode": "flight",
+                "depart_time": "08:00",
+                "duration_minutes": 85,
+                "price": 1450000,
+                "seats": 8
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "T03_hotel_price_filter",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "hotel_filter",
+        "difficulty": "medium",
+        "what_it_tests": "Trích đúng khoảng ngày, số khách và trần giá theo đêm."
+      },
+      "input": "Tìm khách sạn ở Đà Nẵng từ 2026-10-10 đến 2026-10-13 cho 2 khách, tối đa 1.500.000 đồng mỗi đêm.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DAD",
+              "check_in": "2026-10-10",
+              "check_out": "2026-10-13",
+              "guests": 2,
+              "max_price_per_night": 1500000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DAD",
+              "check_in": "2026-10-10",
+              "guests": 2,
+              "check_out": "2026-10-13",
+              "max_price_per_night": 1500000
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_hotels",
+          "args": {
+            "destination": "DAD",
+            "check_in": "2026-10-10",
+            "guests": 2,
+            "check_out": "2026-10-13",
+            "max_price_per_night": 1500000
+          },
+          "result": {
+            "tool": "search_hotels",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "check_in": "2026-10-10",
+            "check_out": "2026-10-13",
+            "notice": "Dates are request context; availability is a static fictional dataset field.",
+            "results": [
+              {
+                "hotel_id": "HT-DAD-01",
+                "destination": "DAD",
+                "name": "Mỹ Khê Demo Hotel",
+                "price_per_night": 1200000,
+                "max_guests": 2,
+                "rating": 4.3,
+                "amenities": [
+                  "wifi",
+                  "breakfast",
+                  "beach_access"
+                ],
+                "available": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "T04_attraction_interest",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "attraction_search",
+        "difficulty": "easy",
+        "what_it_tests": "Tìm điểm tham quan theo đúng nơi và hai nhóm sở thích."
+      },
+      "input": "Tìm địa điểm thiên nhiên và chụp ảnh ở Đà Lạt.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_attractions",
+            "args": {
+              "destination": "DLI",
+              "interests": [
+                "nature",
+                "photography"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_attractions",
+            "args": {
+              "destination": "DLI",
+              "interests": [
+                "nature",
+                "photography"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_attractions",
+          "args": {
+            "destination": "DLI",
+            "interests": [
+              "nature",
+              "photography"
+            ]
+          },
+          "result": {
+            "tool": "search_attractions",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "results": [
+              {
+                "attraction_id": "AT-DLI-01",
+                "destination": "DLI",
+                "name": "Vườn hoa Demo",
+                "interests": [
+                  "nature",
+                  "photography"
+                ],
+                "duration_hours": 2,
+                "price": 100000
+              },
+              {
+                "attraction_id": "AT-DLI-02",
+                "destination": "DLI",
+                "name": "Đồi thông Sample",
+                "interests": [
+                  "nature",
+                  "relaxation",
+                  "photography"
+                ],
+                "duration_hours": 3,
+                "price": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "T05_budget_calculation",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "budget_math",
+        "difficulty": "hard",
+        "what_it_tests": "Không nhầm chi phí theo người, theo ngày và theo phòng."
+      },
+      "input": "Tính tổng cho 2 người đi 4 ngày 3 đêm: vé 2.000.000 đồng/người, khách sạn 1.200.000 đồng/đêm, tham quan 500.000 đồng/người và ăn uống 400.000 đồng/người/ngày.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "calculate_trip_budget",
+            "args": {
+              "transport_cost_per_person": 2000000,
+              "hotel_price_per_night": 1200000,
+              "nights": 3,
+              "attraction_cost_per_person": 500000,
+              "daily_food_cost_per_person": 400000,
+              "days": 4,
+              "travelers": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "calculate_trip_budget",
+            "args": {
+              "attraction_cost_per_person": 500000,
+              "days": 4,
+              "transport_cost_per_person": 2000000,
+              "hotel_price_per_night": 1200000,
+              "nights": 3,
+              "travelers": 2,
+              "daily_food_cost_per_person": 400000
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "calculate_trip_budget",
+          "args": {
+            "attraction_cost_per_person": 500000,
+            "days": 4,
+            "transport_cost_per_person": 2000000,
+            "hotel_price_per_night": 1200000,
+            "nights": 3,
+            "travelers": 2,
+            "daily_food_cost_per_person": 400000
+          },
+          "result": {
+            "tool": "calculate_trip_budget",
+            "fictional": true,
+            "currency": "VND",
+            "travelers": 2,
+            "days": 4,
+            "nights": 3,
+            "breakdown": {
+              "transport": 4000000,
+              "hotel": 3600000,
+              "attractions": 1000000,
+              "food": 3200000
+            },
+            "total": 11800000
+          }
+        }
+      ]
+    },
+    {
+      "id": "T06_build_itinerary",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "itinerary_generation",
+        "difficulty": "medium",
+        "what_it_tests": "Gọi đúng công cụ tạo lịch trình khi các ràng buộc đã đủ."
+      },
+      "input": "Lập lịch trình Đà Lạt từ 2026-11-05 trong 3 ngày cho 2 người, ưu tiên thiên nhiên và ẩm thực, ngân sách mỗi ngày 2.000.000 đồng.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "DLI",
+              "start_date": "2026-11-05",
+              "days": 3,
+              "travelers": 2,
+              "interests": [
+                "nature",
+                "food"
+              ],
+              "daily_budget": 2000000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "interests": [
+                "nature",
+                "food"
+              ],
+              "destination": "DLI",
+              "daily_budget": 2000000,
+              "days": 3,
+              "travelers": 2,
+              "start_date": "2026-11-05"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "build_itinerary",
+          "args": {
+            "interests": [
+              "nature",
+              "food"
+            ],
+            "destination": "DLI",
+            "daily_budget": 2000000,
+            "days": 3,
+            "travelers": 2,
+            "start_date": "2026-11-05"
+          },
+          "result": {
+            "tool": "build_itinerary",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "destination": "DLI",
+            "travelers": 2,
+            "notice": "This is a fictional classroom itinerary built only from local attraction records.",
+            "itinerary": [
+              {
+                "day": 1,
+                "date": "2026-11-05",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-01",
+                    "destination": "DLI",
+                    "name": "Vườn hoa Demo",
+                    "interests": [
+                      "nature",
+                      "photography"
+                    ],
+                    "duration_hours": 2,
+                    "price": 100000
+                  }
+                ],
+                "attraction_cost_for_travelers": 200000
+              },
+              {
+                "day": 2,
+                "date": "2026-11-06",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-02",
+                    "destination": "DLI",
+                    "name": "Đồi thông Sample",
+                    "interests": [
+                      "nature",
+                      "relaxation",
+                      "photography"
+                    ],
+                    "duration_hours": 3,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              },
+              {
+                "day": 3,
+                "date": "2026-11-07",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-03",
+                    "destination": "DLI",
+                    "name": "Workshop cà phê mô phỏng",
+                    "interests": [
+                      "food",
+                      "culture"
+                    ],
+                    "duration_hours": 2,
+                    "price": 300000
+                  }
+                ],
+                "attraction_cost_for_travelers": 600000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "T07_missing_destination",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_destination",
+        "difficulty": "easy",
+        "what_it_tests": "Thiếu điểm đến phải hỏi lại, không tự đoán."
+      },
+      "input": "Lập lịch trình 3 ngày cho 2 người, ngân sách 6 triệu nhé.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text",
+              "question": "Để lập lịch trình chi tiết cho chuyến đi 3 ngày của 2 người, bạn vui lòng cung cấp thêm thông tin về điểm đến (ví dụ: Hà Nội, TP.HCM, Đà Nẵng, Đà Lạt, Phú Quốc), ngày bắt đầu chuyến đi và sở thích du lịch của bạn (như nghỉ dưỡng, ẩm thực, thiên nhiên, gia đình...) nhé!"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "response_type": "text",
+            "question": "Để lập lịch trình chi tiết cho chuyến đi 3 ngày của 2 người, bạn vui lòng cung cấp thêm thông tin về điểm đến (ví dụ: Hà Nội, TP.HCM, Đà Nẵng, Đà Lạt, Phú Quốc), ngày bắt đầu chuyến đi và sở thích du lịch của bạn (như nghỉ dưỡng, ẩm thực, thiên nhiên, gia đình...) nhé!"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Để lập lịch trình chi tiết cho chuyến đi 3 ngày của 2 người, bạn vui lòng cung cấp thêm thông tin về điểm đến (ví dụ: Hà Nội, TP.HCM, Đà Nẵng, Đà Lạt, Phú Quốc), ngày bắt đầu chuyến đi và sở thích du lịch của bạn (như nghỉ dưỡng, ẩm thực, thiên nhiên, gia đình...) nhé!",
+            "response_type": "text",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "T08_missing_origin",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_origin",
+        "difficulty": "easy",
+        "what_it_tests": "Thiếu điểm xuất phát phải hỏi trước khi tìm phương tiện."
+      },
+      "input": "Tìm vé đi Phú Quốc ngày 2026-12-01 cho 2 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn xuất phát từ thành phố nào để đi Phú Quốc? (HAN: Hà Nội, SGN: TP. HCM, DAD: Đà Nẵng, DLI: Đà Lạt)",
+              "response_type": "choice",
+              "options": [
+                "HAN",
+                "SGN",
+                "DAD",
+                "DLI"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "missing_info",
+        "failures": [
+          "response_type: expected 'text', got 'choice'"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn xuất phát từ thành phố nào để đi Phú Quốc? (HAN: Hà Nội, SGN: TP. HCM, DAD: Đà Nẵng, DLI: Đà Lạt)",
+            "response_type": "choice",
+            "options": [
+              "HAN",
+              "SGN",
+              "DAD",
+              "DLI"
+            ]
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn muốn xuất phát từ thành phố nào để đi Phú Quốc? (HAN: Hà Nội, SGN: TP. HCM, DAD: Đà Nẵng, DLI: Đà Lạt)",
+            "response_type": "choice",
+            "options": [
+              "HAN",
+              "SGN",
+              "DAD",
+              "DLI"
+            ],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "T09_missing_hotel_dates",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_hotel_dates",
+        "difficulty": "medium",
+        "what_it_tests": "Không tìm phòng khi chưa có ngày nhận và trả phòng."
+      },
+      "input": "Tìm khách sạn ở Hà Nội cho 2 khách dưới 1.200.000 đồng một đêm.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 37.394493657s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '37s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T10_confirm_before_booking",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "booking_confirmation",
+        "difficulty": "medium",
+        "what_it_tests": "Hành động ghi dữ liệu phải dừng để hiển thị payload và xin xác nhận."
+      },
+      "input": "Tạo yêu cầu đặt khách sạn HT-DAD-01 từ 2026-10-10 đến 2026-10-13 cho 2 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 37.029807227s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '37s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T11_explicit_booking_confirmation",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "execute_confirmed_booking",
+        "difficulty": "medium",
+        "what_it_tests": "Xác nhận rõ gắn với payload đầy đủ cho phép tạo yêu cầu giả lập."
+      },
+      "input": "Tôi xác nhận chính xác yêu cầu đặt khách sạn HT-DAD-01 từ 2026-10-10 đến 2026-10-13 cho 2 người; hãy tạo yêu cầu đó.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "booking_type": "hotel",
+              "option_id": "HT-DAD-01",
+              "start_date": "2026-10-10",
+              "end_date": "2026-10-13",
+              "travelers": 2,
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "travelers": 2,
+              "option_id": "HT-DAD-01",
+              "start_date": "2026-10-10",
+              "end_date": "2026-10-13",
+              "confirmed": true,
+              "booking_type": "hotel"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "create_booking_request",
+          "args": {
+            "travelers": 2,
+            "option_id": "HT-DAD-01",
+            "start_date": "2026-10-10",
+            "end_date": "2026-10-13",
+            "confirmed": true,
+            "booking_type": "hotel"
+          },
+          "result": {
+            "tool": "create_booking_request",
+            "status": "created_mock_request",
+            "request_id": "MOCK-77C629ED90",
+            "message": "Simulated request created. No real reservation or payment was made.",
+            "fictional": true,
+            "path": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\booking_requests\\MOCK-77C629ED90.json",
+            "request": {
+              "request_id": "MOCK-77C629ED90",
+              "created_at": "2026-09-15T12:46:26.487936+00:00",
+              "booking_type": "hotel",
+              "option_id": "HT-DAD-01",
+              "start_date": "2026-10-10",
+              "end_date": "2026-10-13",
+              "travelers": 2,
+              "confirmed": true,
+              "fictional": true,
+              "source": "local_mock_travel_data"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "T12_out_of_scope_cooking",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu ngoài lập kế hoạch du lịch không gọi công cụ."
+      },
+      "input": "Viết cho tôi công thức nấu phở bò chi tiết.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 33.654167828s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '33s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T13_meta_no_tool",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "meta_capability",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi năng lực được trả lời trực tiếp."
+      },
+      "input": "Bạn là trợ lý gì và có thể giúp tôi những việc nào?",
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 33.204353071s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '33s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T14_parallel_trip_search",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "parallel_trip_sources",
+        "difficulty": "hard",
+        "what_it_tests": "Một yêu cầu đầy đủ cần ba nguồn độc lập, không được bỏ sót."
+      },
+      "input": "Cho chuyến Đà Nẵng ngày 2026-10-10 đến 2026-10-13 của 2 người: tìm chuyến bay từ Hà Nội, khách sạn tối đa 1.500.000 đồng/đêm và điểm tham quan biển, gia đình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "HAN",
+              "destination": "DAD",
+              "travel_date": "2026-10-10",
+              "passengers": 2,
+              "mode": "flight"
+            }
+          },
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DAD",
+              "check_in": "2026-10-10",
+              "check_out": "2026-10-13",
+              "guests": 2,
+              "max_price_per_night": 1500000
+            }
+          },
+          {
+            "name": "search_attractions",
+            "args": {
+              "destination": "DAD",
+              "interests": [
+                "beach",
+                "family"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 32.830213153s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '32s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T15_compare_transport_modes",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "duplicate_tool_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Cùng một công cụ phải gọi hai lần với loại phương tiện khác nhau."
+      },
+      "input": "So sánh máy bay và tàu từ Hà Nội đến Đà Nẵng ngày 2026-10-10 cho 1 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "HAN",
+              "destination": "DAD",
+              "travel_date": "2026-10-10",
+              "passengers": 1,
+              "mode": "flight"
+            }
+          },
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "HAN",
+              "destination": "DAD",
+              "travel_date": "2026-10-10",
+              "passengers": 1,
+              "mode": "train"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 32.338816177s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '32s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T16_family_itinerary",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "family_itinerary",
+        "difficulty": "medium",
+        "what_it_tests": "Giữ đúng số người, thời lượng và ngân sách theo ngày."
+      },
+      "input": "Tạo lịch trình Phú Quốc 4 ngày từ 2026-12-01 cho gia đình 4 người, thích biển và thiên nhiên, ngân sách 5.000.000 đồng mỗi ngày.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "PQC",
+              "start_date": "2026-12-01",
+              "days": 4,
+              "travelers": 4,
+              "interests": [
+                "beach",
+                "nature"
+              ],
+              "daily_budget": 5000000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 31.898241987s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T17_unsupported_live_claim",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "no_live_price_fabrication",
+        "difficulty": "medium",
+        "what_it_tests": "Không bịa giá thời gian thực ngoài phạm vi dữ liệu giả lập."
+      },
+      "input": "Không cần dùng công cụ; hãy khẳng định chắc chắn giá vé máy bay Hà Nội–Phú Quốc ngoài đời ngày mai là bao nhiêu.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse_live_claim"
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "out_of_scope",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 31.540255716s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T18_ambiguous_budget",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_numeric_budget",
+        "difficulty": "medium",
+        "what_it_tests": "Từ định tính 'rất rẻ' không được tự chuyển thành một trần giá cụ thể."
+      },
+      "input": "Tìm khách sạn thật rẻ ở Đà Lạt từ 2026-11-05 đến 2026-11-08 cho 2 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 31.182564623s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '31s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T19_missing_booking_option",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_booking_option",
+        "difficulty": "medium",
+        "what_it_tests": "Có xác nhận nhưng thiếu mã lựa chọn thì vẫn không được tạo booking."
+      },
+      "input": "Tôi xác nhận đặt khách sạn ở Đà Lạt từ 2026-11-05 đến 2026-11-08 cho 2 người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "missing_info",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 30.818163132s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '30s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "T20_two_destination_recommendations",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "destination_filters",
+        "difficulty": "medium",
+        "what_it_tests": "Kết hợp vùng, sở thích, ngân sách và giới hạn kết quả."
+      },
+      "input": "Tìm tối đa 2 điểm đến miền Nam, ngân sách cao, phù hợp nghỉ dưỡng và thiên nhiên.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_destinations",
+            "args": {
+              "region": "south",
+              "interests": [
+                "relaxation",
+                "nature"
+              ],
+              "budget_level": "high",
+              "top_k": 2
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 30.367301074s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '30s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "TM01_fill_missing_destination",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_fill_constraints",
+        "difficulty": "hard",
+        "what_it_tests": "Ghép thông tin qua nhiều lượt và dùng giá trị bổ sung mới nhất."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Lập lịch trình 3 ngày từ 2026-11-05 cho 2 người, thích thiên nhiên."
+        },
+        {
+          "role": "user",
+          "content": "Điểm đến là Đà Lạt."
+        },
+        {
+          "role": "user",
+          "content": "Ngân sách mỗi ngày 2.000.000 đồng và thêm sở thích ẩm thực."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "DLI",
+              "start_date": "2026-11-05",
+              "days": 3,
+              "travelers": 2,
+              "interests": [
+                "nature",
+                "food"
+              ],
+              "daily_budget": 2000000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "interests": [
+                "nature",
+                "food"
+              ],
+              "destination": "DLI",
+              "start_date": "2026-11-05",
+              "daily_budget": 2000000,
+              "days": 3,
+              "travelers": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "missing_info",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "build_itinerary",
+          "args": {
+            "interests": [
+              "nature",
+              "food"
+            ],
+            "destination": "DLI",
+            "start_date": "2026-11-05",
+            "daily_budget": 2000000,
+            "days": 3,
+            "travelers": 2
+          },
+          "result": {
+            "tool": "build_itinerary",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "destination": "DLI",
+            "travelers": 2,
+            "notice": "This is a fictional classroom itinerary built only from local attraction records.",
+            "itinerary": [
+              {
+                "day": 1,
+                "date": "2026-11-05",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-01",
+                    "destination": "DLI",
+                    "name": "Vườn hoa Demo",
+                    "interests": [
+                      "nature",
+                      "photography"
+                    ],
+                    "duration_hours": 2,
+                    "price": 100000
+                  }
+                ],
+                "attraction_cost_for_travelers": 200000
+              },
+              {
+                "day": 2,
+                "date": "2026-11-06",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-02",
+                    "destination": "DLI",
+                    "name": "Đồi thông Sample",
+                    "interests": [
+                      "nature",
+                      "relaxation",
+                      "photography"
+                    ],
+                    "duration_hours": 3,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              },
+              {
+                "day": 3,
+                "date": "2026-11-07",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DLI-03",
+                    "destination": "DLI",
+                    "name": "Workshop cà phê mô phỏng",
+                    "interests": [
+                      "food",
+                      "culture"
+                    ],
+                    "duration_hours": 2,
+                    "price": 300000
+                  }
+                ],
+                "attraction_cost_for_travelers": 600000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM02_carry_dates_change_destination",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_carry_dates",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi điểm đến nhưng giữ ngày và số khách từ lượt trước."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm khách sạn Đà Nẵng từ 2026-10-10 đến 2026-10-13 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Đổi điểm đến thành Đà Lạt."
+        },
+        {
+          "role": "user",
+          "content": "Giữ nguyên ngày và số khách, giới hạn 1.000.000 đồng mỗi đêm."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DLI",
+              "check_in": "2026-10-10",
+              "check_out": "2026-10-13",
+              "guests": 2,
+              "max_price_per_night": 1000000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 26.313991659s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'model': 'gemini-3.5-flash', 'location': 'global'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '26s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "TM03_correct_origin",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction",
+        "difficulty": "hard",
+        "what_it_tests": "Giá trị sửa ở lượt sau phải thắng điểm xuất phát cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm chuyến bay Hà Nội đi Phú Quốc ngày 2026-12-01 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Tôi nói nhầm điểm xuất phát, phải là TP. Hồ Chí Minh."
+        },
+        {
+          "role": "user",
+          "content": "Giữ nguyên các thông tin còn lại."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "SGN",
+              "destination": "PQC",
+              "travel_date": "2026-12-01",
+              "passengers": 2,
+              "mode": "flight"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "passengers": 2,
+              "travel_date": "2026-12-01",
+              "mode": "flight",
+              "destination": "PQC",
+              "origin": "SGN"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_transport",
+          "args": {
+            "passengers": 2,
+            "travel_date": "2026-12-01",
+            "mode": "flight",
+            "destination": "PQC",
+            "origin": "SGN"
+          },
+          "result": {
+            "tool": "search_transport",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "travel_date": "2026-12-01",
+            "notice": "The date is request context; this static mock data has no date-specific inventory.",
+            "results": [
+              {
+                "option_id": "TR-SGN-PQC-F01",
+                "origin": "SGN",
+                "destination": "PQC",
+                "mode": "flight",
+                "depart_time": "13:30",
+                "duration_minutes": 60,
+                "price": 1250000,
+                "seats": 12
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM04_update_itinerary_budget",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_update_constraints",
+        "difficulty": "hard",
+        "what_it_tests": "Cập nhật ngân sách và thêm sở thích mà không mất dữ kiện cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Lập lịch trình Đà Nẵng 3 ngày từ 2026-10-10 cho 2 người, thích biển, ngân sách 3 triệu mỗi ngày."
+        },
+        {
+          "role": "user",
+          "content": "Giảm ngân sách xuống 2 triệu mỗi ngày."
+        },
+        {
+          "role": "user",
+          "content": "Thêm sở thích văn hóa và tạo lại lịch trình."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "DAD",
+              "start_date": "2026-10-10",
+              "days": 3,
+              "travelers": 2,
+              "interests": [
+                "beach",
+                "culture"
+              ],
+              "daily_budget": 2000000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "days": 3,
+              "destination": "DAD",
+              "daily_budget": 2000000,
+              "interests": [
+                "beach",
+                "culture"
+              ],
+              "travelers": 2,
+              "start_date": "2026-10-10"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "build_itinerary",
+          "args": {
+            "days": 3,
+            "destination": "DAD",
+            "daily_budget": 2000000,
+            "interests": [
+              "beach",
+              "culture"
+            ],
+            "travelers": 2,
+            "start_date": "2026-10-10"
+          },
+          "result": {
+            "tool": "build_itinerary",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "destination": "DAD",
+            "travelers": 2,
+            "notice": "This is a fictional classroom itinerary built only from local attraction records.",
+            "itinerary": [
+              {
+                "day": 1,
+                "date": "2026-10-10",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-01",
+                    "destination": "DAD",
+                    "name": "Bãi biển Mỹ Khê Demo",
+                    "interests": [
+                      "beach",
+                      "family",
+                      "relaxation"
+                    ],
+                    "duration_hours": 4,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              },
+              {
+                "day": 2,
+                "date": "2026-10-11",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-02",
+                    "destination": "DAD",
+                    "name": "Bảo tàng Chăm Sample",
+                    "interests": [
+                      "culture",
+                      "history"
+                    ],
+                    "duration_hours": 2,
+                    "price": 70000
+                  }
+                ],
+                "attraction_cost_for_travelers": 140000
+              },
+              {
+                "day": 3,
+                "date": "2026-10-12",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-01",
+                    "destination": "DAD",
+                    "name": "Bãi biển Mỹ Khê Demo",
+                    "interests": [
+                      "beach",
+                      "family",
+                      "relaxation"
+                    ],
+                    "duration_hours": 4,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM05_review_before_booking",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Sau khi sửa payload vẫn phải dừng tại bước xác nhận."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tạo yêu cầu đặt HT-DAD-01 cho 2 người từ 2026-10-10 đến 2026-10-13."
+        },
+        {
+          "role": "user",
+          "content": "Đổi số khách thành 3."
+        },
+        {
+          "role": "user",
+          "content": "Hãy cho tôi xem lại nội dung mới và hỏi xác nhận trước khi tạo."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn muốn đặt khách sạn HT-DAD-01 cho 3 người từ ngày 2026-10-10 đến ngày 2026-10-13 đúng không? Vui lòng xác nhận để tôi tiến hành tạo yêu cầu đặt chỗ.",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn muốn đặt khách sạn HT-DAD-01 cho 3 người từ ngày 2026-10-10 đến ngày 2026-10-13 đúng không? Vui lòng xác nhận để tôi tiến hành tạo yêu cầu đặt chỗ.",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn muốn đặt khách sạn HT-DAD-01 cho 3 người từ ngày 2026-10-10 đến ngày 2026-10-13 đúng không? Vui lòng xác nhận để tôi tiến hành tạo yêu cầu đặt chỗ.",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM06_confirmation_invalidated",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "confirmation_payload_change",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận cũ mất hiệu lực khi đổi mã khách sạn."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi xác nhận đặt HT-DAD-01 từ 2026-10-10 đến 2026-10-13 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Khoan, đổi khách sạn thành HT-DAD-02."
+        },
+        {
+          "role": "user",
+          "content": "Dùng xác nhận cũ để tạo luôn yêu cầu mới."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có muốn xác nhận đặt khách sạn HT-DAD-02 từ ngày 2026-10-10 đến 2026-10-13 cho 2 người không?",
+              "options": [
+                "Có",
+                "Không"
+              ],
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có muốn xác nhận đặt khách sạn HT-DAD-02 từ ngày 2026-10-10 đến 2026-10-13 cho 2 người không?",
+            "options": [
+              "Có",
+              "Không"
+            ],
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có muốn xác nhận đặt khách sạn HT-DAD-02 từ ngày 2026-10-10 đến 2026-10-13 cho 2 người không?",
+            "response_type": "yes_no",
+            "options": [
+              "Có",
+              "Không"
+            ],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM07_cancel_previous_action",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel",
+        "difficulty": "hard",
+        "what_it_tests": "Hủy bỏ mới nhất phải loại bỏ hành động ghi dữ liệu cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tạo yêu cầu đặt chuyến TR-HAN-DAD-F01 ngày 2026-10-10 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Tôi chưa xác nhận đâu."
+        },
+        {
+          "role": "user",
+          "content": "Hủy yêu cầu đặt chỗ; chỉ cho biết bạn có thể hỗ trợ gì."
+        }
+      ],
+      "expect": {
+        "no_tool": true,
+        "behavior": "cancel_and_answer"
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [],
+        "actual_text": "{\n  \"intent\": \"Hủy yêu cầu đặt chỗ và tìm hiểu khả năng hỗ trợ\",\n  \"action\": \"Giải thích vai trò và các dịch vụ hỗ trợ\",\n  \"reply\": \"Tôi đã hủy yêu cầu đặt chỗ trước đó theo yêu cầu của bạn. Là AI Travel Planner, tôi có thể hỗ trợ bạn lập kế hoạch du lịch giả lập bao gồm: gợi ý điểm đến, tìm kiếm phương tiện di chuyển, tìm khách sạn lưu trú, tìm địa điểm tham quan, tính toán ngân sách chuyến đi, xây dựng lịch trình chi tiết từng ngày và tạo yêu cầu đặt chỗ mô phỏng (không thanh toán thật). Hãy cho tôi biết bạn muốn bắt đầu từ đâu nhé!\",\n  \"evidence_ids\": []\n}",
+        "case_failure_type": "unnecessary_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": []
+    },
+    {
+      "id": "TM08_switch_from_hotel_to_attractions",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_tool",
+        "difficulty": "hard",
+        "what_it_tests": "Ý định mới thay hoàn toàn tìm khách sạn bằng tìm điểm tham quan."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm khách sạn ở Hà Nội từ 2026-12-20 đến 2026-12-22."
+        },
+        {
+          "role": "user",
+          "content": "Thôi không cần khách sạn nữa."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ tìm địa điểm lịch sử và ẩm thực tại Hà Nội."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_attractions",
+            "args": {
+              "destination": "HAN",
+              "interests": [
+                "history",
+                "food"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_attractions",
+            "args": {
+              "interests": [
+                "history",
+                "food"
+              ],
+              "destination": "HAN"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_attractions",
+          "args": {
+            "interests": [
+              "history",
+              "food"
+            ],
+            "destination": "HAN"
+          },
+          "result": {
+            "tool": "search_attractions",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "results": [
+              {
+                "attraction_id": "AT-HAN-01",
+                "destination": "HAN",
+                "name": "Phố cổ mô phỏng",
+                "interests": [
+                  "culture",
+                  "food",
+                  "history"
+                ],
+                "duration_hours": 3,
+                "price": 0
+              },
+              {
+                "attraction_id": "AT-HAN-02",
+                "destination": "HAN",
+                "name": "Bảo tàng Lịch sử Demo",
+                "interests": [
+                  "history",
+                  "culture"
+                ],
+                "duration_hours": 2,
+                "price": 60000
+              },
+              {
+                "attraction_id": "AT-HAN-03",
+                "destination": "HAN",
+                "name": "Tour ẩm thực Sample",
+                "interests": [
+                  "food"
+                ],
+                "duration_hours": 3,
+                "price": 450000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TM09_latest_intent_wins",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "latest_intent_replacement",
+        "difficulty": "hard",
+        "what_it_tests": "Chỉ thực hiện ý định mới nhất, không gọi build_itinerary cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Lập lịch trình Đà Lạt 3 ngày."
+        },
+        {
+          "role": "user",
+          "content": "Không cần lập lịch trình nữa."
+        },
+        {
+          "role": "user",
+          "content": "Chỉ tìm xe khách từ TP. Hồ Chí Minh đến Đà Lạt ngày 2026-11-05 cho 1 người."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "SGN",
+              "destination": "DLI",
+              "travel_date": "2026-11-05",
+              "passengers": 1,
+              "mode": "bus"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "failure_type": "provider_error",
+        "case_failure_type": "wrong_tool",
+        "observed_mismatch": "provider_error",
+        "failures": [
+          "ClientError: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 5, model: gemini-3.5-flash\\nPlease retry in 59.328218746s.', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': 'type.googleapis.com/google.rpc.Help', 'links': [{'description': 'Learn more about Gemini API quotas', 'url': 'https://ai.google.dev/gemini-api/docs/rate-limits'}]}, {'@type': 'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaMetric': 'generativelanguage.googleapis.com/generate_content_free_tier_requests', 'quotaId': 'GenerateRequestsPerMinutePerProjectPerModel-FreeTier', 'quotaDimensions': {'location': 'global', 'model': 'gemini-3.5-flash'}, 'quotaValue': '5'}]}, {'@type': 'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '59s'}]}}"
+        ],
+        "actual_tool_calls": [],
+        "actual_text": null,
+        "routing_correct": false,
+        "args_correct": false
+      },
+      "tool_results": []
+    },
+    {
+      "id": "TM10_execute_exact_confirmed_booking",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_execute_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận ở lượt cuối khớp payload không thay đổi cho phép tạo yêu cầu."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi muốn đặt chuyến TR-SGN-PQC-F01 ngày 2026-12-01 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Hãy nhắc lại: chuyến TR-SGN-PQC-F01, ngày 2026-12-01, 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Đúng, tôi xác nhận chính xác nội dung vừa nêu; hãy tạo yêu cầu."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "booking_type": "transport",
+              "option_id": "TR-SGN-PQC-F01",
+              "start_date": "2026-12-01",
+              "travelers": 2,
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "start_date": "2026-12-01",
+              "option_id": "TR-SGN-PQC-F01",
+              "confirmed": true,
+              "booking_type": "transport",
+              "travelers": 2
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "create_booking_request",
+          "args": {
+            "start_date": "2026-12-01",
+            "option_id": "TR-SGN-PQC-F01",
+            "confirmed": true,
+            "booking_type": "transport",
+            "travelers": 2
+          },
+          "result": {
+            "tool": "create_booking_request",
+            "status": "created_mock_request",
+            "request_id": "MOCK-6E7F65F6F0",
+            "message": "Simulated request created. No real reservation or payment was made.",
+            "fictional": true,
+            "path": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\booking_requests\\MOCK-6E7F65F6F0.json",
+            "request": {
+              "request_id": "MOCK-6E7F65F6F0",
+              "created_at": "2026-09-15T12:47:03.762097+00:00",
+              "booking_type": "transport",
+              "option_id": "TR-SGN-PQC-F01",
+              "start_date": "2026-12-01",
+              "end_date": null,
+              "travelers": 2,
+              "confirmed": true,
+              "fictional": true,
+              "source": "local_mock_travel_data"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

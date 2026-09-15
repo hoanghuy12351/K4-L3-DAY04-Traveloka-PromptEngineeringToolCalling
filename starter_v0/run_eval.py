@@ -260,7 +260,7 @@ def print_table(results: list[dict[str, Any]], summary: dict[str, Any]) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run IT Helpdesk Agent live evals.")
+    parser = argparse.ArgumentParser(description="Run AI Travel Planner live evals.")
     parser.add_argument("--phase", choices=["B"], default="B")
     parser.add_argument("--suite", choices=["base", "group", "cross", "extension", "adversarial"], default="base", help="Run label saved to JSON; does not filter --eval-cases.")
     parser.add_argument("--version", required=True)

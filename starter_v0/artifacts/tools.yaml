@@ -1,107 +1,101 @@
-# starter_v0 — intentionally incomplete first-draft declarations.
-# Students improve routing guidance, argument conventions, missing-information
-# handling, and confirmation boundaries through v1/v2/v3.
-#
-# Keep built-in names and supplied evaluation cases unchanged.
-# Improve descriptions and compatible schemas. Declare team-built bonus tools
-# here and in tools/__init__.py, then test them with team-authored cases.
 tools:
-  # ---------------- Core tools ----------------
   - name: clarify
-    description: "Gửi một câu hỏi cho người dùng."
+    description: Ask the user for missing travel details or explicit confirmation before a mock booking request.
     parameters:
       type: object
       properties:
-        question: {type: string, default: "", description: "Câu hỏi"}
-        response_type: {type: string, enum: [text, yes_no, choice], default: "text", description: "Kiểu trả lời"}
-        options: {type: array, default: [], items: {type: string}, description: "Các lựa chọn"}
+        question: {type: string, description: The question to ask the user.}
+        response_type: {type: string, enum: [text, yes_no, choice], default: text, description: Expected response format.}
+        options: {type: array, items: {type: string}, default: [], description: Options for a choice question.}
       required: [question]
 
-  - name: search_kb
-    description: "Tìm hướng dẫn hỗ trợ kỹ thuật."
+  - name: search_destinations
+    description: Recommend fictional local destinations by interest and budget. Use canonical city codes in results; optionally filter by region.
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Nội dung cần tìm"}
-        category: {type: string, enum: [all, vpn, email, wifi, printing, account, security, hardware, software, meeting_room], default: "all", description: "Nhóm hướng dẫn"}
-        top_k: {type: integer, default: 3, description: "Số kết quả"}
-      required: [query]
+        interests: {type: array, items: {type: string}, description: Travel interests such as beach, family, nature, or food.}
+        budget_level: {type: string, enum: [low, medium, high], description: Requested budget level.}
+        top_k: {type: integer, default: 5, minimum: 1, description: Maximum result count.}
+        region: {type: string, enum: [north, south, central, central_highlands], description: Optional destination region.}
+      required: [interests, budget_level]
 
-  - name: check_service_status
-    description: "Kiểm tra trạng thái một dịch vụ."
+  - name: search_transport
+    description: Search fictional local transport by canonical origin and destination codes. travel_date is required request context, not live date-specific inventory.
     parameters:
       type: object
       properties:
-        service: {type: string, enum: [vpn, email, sso, wifi, printing], description: "Tên dịch vụ"}
-        environment: {type: string, enum: [production, staging], default: "production", description: "Môi trường"}
-      required: [service]
+        origin: {type: string, description: Canonical origin city code: HAN, SGN, DAD, DLI, or PQC.}
+        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        travel_date: {type: string, description: Requested travel date in YYYY-MM-DD.}
+        passengers: {type: integer, minimum: 1, description: Number of travelers.}
+        mode: {type: string, enum: [all, flight, train, bus], default: all, description: Transport mode.}
+        max_price: {type: integer, minimum: 0, description: Optional maximum fictional per-person price in VND.}
+        top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
+      required: [origin, destination, travel_date, passengers]
 
-  - name: inspect_device
-    description: "Kiểm tra thông tin và chẩn đoán thiết bị."
+  - name: search_hotels
+    description: Search fictional local hotels by canonical destination code. Check-in and check-out are required request context; static availability is not real date-specific inventory.
     parameters:
       type: object
       properties:
-        asset_id: {type: string, description: "Mã tài sản"}
-        check: {type: string, enum: [all, network, vpn, security, hardware, software], default: "all", description: "Nhóm kiểm tra"}
-      required: [asset_id]
+        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        check_in: {type: string, description: Check-in date in YYYY-MM-DD.}
+        check_out: {type: string, description: Check-out date in YYYY-MM-DD.}
+        guests: {type: integer, minimum: 1, description: Number of guests.}
+        max_price_per_night: {type: integer, minimum: 0, description: Optional maximum fictional VND price per room per night.}
+        min_rating: {type: number, minimum: 0, description: Optional minimum fictional rating.}
+        amenities: {type: array, items: {type: string}, description: Optional required amenities.}
+        top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
+      required: [destination, check_in, check_out, guests]
 
-  - name: lookup_user
-    description: "Tra cứu người dùng trong danh bạ hỗ trợ."
+  - name: search_attractions
+    description: Search fictional local attractions by canonical destination code and interests.
     parameters:
       type: object
       properties:
-        employee_id: {type: string, description: "Mã nhân viên"}
-      required: [employee_id]
+        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        interests: {type: array, items: {type: string}, description: Travel interests to match.}
+        max_price: {type: integer, minimum: 0, description: Optional maximum fictional attraction price in VND.}
+        top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
+      required: [destination, interests]
 
-  - name: format_incident_report
-    description: "Trình bày các kết quả đã có thành báo cáo."
+  - name: calculate_trip_budget
+    description: Calculate a deterministic fictional trip budget in VND. Use this tool rather than calculating the total yourself.
     parameters:
       type: object
       properties:
-        findings:
-          type: array
-          default: []
-          description: "Các kết quả đã thu thập"
-          items:
-            type: object
-            properties:
-              label: {type: string}
-              detail: {type: string}
-              source: {type: string}
-              status: {type: string}
-        template: {type: string, enum: [brief, technical, handoff], default: "brief", description: "Mẫu báo cáo"}
-        incident_title: {type: string, default: "IT incident", description: "Tiêu đề"}
-      required: [findings, template]
+        transport_cost_per_person: {type: integer, minimum: 0, description: Round-trip or supplied transport cost per traveler.}
+        hotel_price_per_night: {type: integer, minimum: 0, description: Hotel price per night.}
+        nights: {type: integer, minimum: 0, description: Number of nights.}
+        attraction_cost_per_person: {type: integer, minimum: 0, description: Total attraction cost per traveler.}
+        daily_food_cost_per_person: {type: integer, minimum: 0, description: Food cost per traveler per day.}
+        days: {type: integer, minimum: 1, description: Number of days.}
+        travelers: {type: integer, minimum: 1, description: Number of travelers.}
+      required: [transport_cost_per_person, hotel_price_per_night, nights, attraction_cost_per_person, daily_food_cost_per_person, days, travelers]
 
-  # ---------------- Optional/advanced tools ----------------
-  - name: search_device_info
-    description: "Tìm thông tin công khai về một model thiết bị trên web. Chỉ truyền hãng, model và loại thông tin; không truyền asset ID, employee ID hoặc dữ liệu nội bộ."
+  - name: build_itinerary
+    description: Build a fictional day-by-day itinerary using only local attraction records and canonical destination codes.
     parameters:
       type: object
       properties:
-        manufacturer: {type: string, description: "Hãng sản xuất công khai, ví dụ Lenovo"}
-        model: {type: string, description: "Tên model công khai, ví dụ ThinkPad T14 Gen 4"}
-        query_type: {type: string, enum: [specs, drivers, support, compatibility], default: "support", description: "Loại thông tin cần tìm"}
-        max_results: {type: integer, default: 3, description: "Số kết quả, tối đa 5"}
-      required: [manufacturer, model, query_type]
+        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        start_date: {type: string, description: Itinerary start date in YYYY-MM-DD.}
+        days: {type: integer, minimum: 1, description: Number of itinerary days.}
+        travelers: {type: integer, minimum: 1, description: Number of travelers.}
+        interests: {type: array, items: {type: string}, description: Interests to prioritize.}
+        daily_budget: {type: integer, minimum: 0, description: Optional maximum daily fictional budget in VND.}
+      required: [destination, start_date, days, travelers, interests]
 
-  - name: policy
-    description: "Tìm trong chính sách IT nội bộ."
+  - name: create_booking_request
+    description: Create a simulated booking request only after explicit confirmation of this exact payload. It never makes a real reservation or payment.
     parameters:
       type: object
       properties:
-        query: {type: string, default: "", description: "Nội dung cần tìm"}
-        policy_area: {type: string, enum: [all, access_control, data_privacy, external_tools, incident_response, service_operations, ticketing], default: "all", description: "Nhóm chính sách"}
-        top_k: {type: integer, default: 3, description: "Số mục"}
-      required: [query]
-
-  - name: create_ticket
-    description: "Tạo một ticket hỗ trợ."
-    parameters:
-      type: object
-      properties:
-        summary: {type: string, default: "", description: "Tóm tắt sự cố"}
-        priority: {type: string, enum: [low, medium, high, critical], default: "medium", description: "Mức ưu tiên"}
-        asset_id: {type: string, default: "", description: "Mã tài sản nếu có"}
-        confirmed: {type: boolean, default: false, description: "Đã được người dùng xác nhận"}
-      required: [summary]
+        booking_type: {type: string, enum: [hotel, transport], description: Type of local mock record to request.}
+        option_id: {type: string, description: Local hotel_id or transport option_id.}
+        start_date: {type: string, description: Start or travel date in YYYY-MM-DD.}
+        end_date: {type: string, description: End date in YYYY-MM-DD; required for hotel requests.}
+        travelers: {type: integer, minimum: 1, description: Number of travelers or hotel guests.}
+        confirmed: {type: boolean, default: false, description: Must be true only after explicit exact-payload confirmation.}
+      required: [booking_type, option_id, start_date, travelers, confirmed]

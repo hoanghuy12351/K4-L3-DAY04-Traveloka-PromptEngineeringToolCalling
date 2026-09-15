@@ -6,30 +6,24 @@ from typing import Any
 import yaml
 
 from .clarify.tool import ask_user
-from .check_service_status.tool import check_service_status
-from .create_ticket.tool import create_ticket
-from .format_incident_report.tool import format_incident_report
-from .inspect_device.tool import inspect_device
-from .lookup_user.tool import lookup_user
-from .policy.tool import search_company_policy
-from .search_kb.tool import search_kb
-from .search_device_info.tool import search_device_info
+from .build_itinerary.tool import build_itinerary
+from .calculate_trip_budget.tool import calculate_trip_budget
+from .create_booking_request.tool import create_booking_request
+from .search_attractions.tool import search_attractions
+from .search_destinations.tool import search_destinations
+from .search_hotels.tool import search_hotels
+from .search_transport.tool import search_transport
 
 
-# These names are part of the fixed evaluation contract. Keep built-in names
-# unchanged in tools.yaml, this registry and the supplied datasets. Improve
-# descriptions and compatible schemas. Register any team-built bonus tool in
-# this registry and tools.yaml, then test it with team-authored cases.
 TOOL_FUNCTIONS = {
     "clarify": ask_user,
-    "search_kb": search_kb,
-    "search_device_info": search_device_info,
-    "check_service_status": check_service_status,
-    "inspect_device": inspect_device,
-    "lookup_user": lookup_user,
-    "format_incident_report": format_incident_report,
-    "policy": search_company_policy,
-    "create_ticket": create_ticket,
+    "search_destinations": search_destinations,
+    "search_transport": search_transport,
+    "search_hotels": search_hotels,
+    "search_attractions": search_attractions,
+    "calculate_trip_budget": calculate_trip_budget,
+    "build_itinerary": build_itinerary,
+    "create_booking_request": create_booking_request,
 }
 
 

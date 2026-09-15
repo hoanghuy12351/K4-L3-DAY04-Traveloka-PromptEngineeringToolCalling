@@ -27,7 +27,7 @@ def main() -> None:
     tools = to_openai_tools(load_tool_declarations(args.tools))
     messages = [
         {"role": "system", "content": "You are a tool-routing smoke test. Use tools when appropriate."},
-        {"role": "user", "content": "Kiểm tra trạng thái dịch vụ VPN production giúp mình."},
+        {"role": "user", "content": "Tìm khách sạn ở Đà Nẵng từ 2026-10-10 đến 2026-10-13 cho 2 khách, tối đa 1.500.000 đồng mỗi đêm."},
     ]
     response = provider.complete(messages, tools, model=args.model, temperature=0.0)
     if not response.tool_calls:

@@ -1,0 +1,36 @@
+{
+  "transcript_id": "ui_v3_openai_20260916T002229175973_b9c67fe2",
+  "source": "web_ui",
+  "version": "v3",
+  "artifact_version": "v3+p6850ec08cdb5+t080ff8930e75",
+  "prompt_hash": "6850ec08cdb57c8d5d7bdcd54a7a1fe9199ae0f6566cd6b8667a0aa803c32474",
+  "tools_hash": "080ff8930e757c9ee6ae05819939dfbcc1dc68060720ba5e34ca7c6eff20768e",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "system_prompt": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-09-16T00:22:29.177+07:00",
+  "updated_at": "2026-09-16T00:23:06.553+07:00",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-09-16T00:22:57.790+07:00",
+      "user": "Bạn có thể hỗ trợ tôi những phần nào khi lập kế hoạch du lịch?",
+      "status": "answered",
+      "assistant_text": "Tôi có thể hỗ trợ bạn trong việc:\n\n1. Chọn điểm đến phù hợp với sở thích và ngân sách của bạn.\n2. Tìm phương tiện di chuyển giữa các thành phố.\n3. Tìm khách sạn để lưu trú.\n4. Tìm địa điểm tham quan thú vị.\n5. Tính toán ngân sách cho chuyến đi.\n6. Xây dựng lịch trình chi tiết cho chuyến đi.\n7. Tạo yêu cầu đặt chỗ giả lập cho khách sạn hoặc phương tiện.\n\nNếu bạn cần hỗ trợ trong bất kỳ phần nào, hãy cho tôi biết!",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": "Tôi có thể hỗ trợ bạn trong việc:\n\n1. Chọn điểm đến phù hợp với sở thích và ngân sách của bạn.\n2. Tìm phương tiện di chuyển giữa các thành phố.\n3. Tìm khách sạn để lưu trú.\n4. Tìm địa điểm tham quan thú vị.\n5. Tính toán ngân sách cho chuyến đi.\n6. Xây dựng lịch trình chi tiết cho chuyến đi.\n7. Tạo yêu cầu đặt chỗ giả lập cho khách sạn hoặc phương tiện.\n\nNếu bạn cần hỗ trợ trong bất kỳ phần nào, hãy cho tôi biết!",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [],
+      "structured_assistant": null,
+      "ended_at": "2026-09-16T00:23:06.553+07:00"
+    }
+  ]
+}

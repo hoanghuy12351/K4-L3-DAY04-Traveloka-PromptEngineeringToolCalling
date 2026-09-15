@@ -1,0 +1,122 @@
+{
+  "transcript_id": "ui_v3_test_20260915T235708398681_a9810913",
+  "source": "web_ui",
+  "version": "v3",
+  "artifact_version": "v3+p6850ec08cdb5+t080ff8930e75",
+  "prompt_hash": "6850ec08cdb57c8d5d7bdcd54a7a1fe9199ae0f6566cd6b8667a0aa803c32474",
+  "tools_hash": "080ff8930e757c9ee6ae05819939dfbcc1dc68060720ba5e34ca7c6eff20768e",
+  "provider": "test",
+  "model": "fake-model",
+  "system_prompt": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "D:\\vin20k\\LabEx\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\tools.yaml",
+  "history_window": 5,
+  "max_tool_rounds": 4,
+  "created_at": "2026-09-15T23:57:08.398+07:00",
+  "updated_at": "2026-09-15T23:57:08.398+07:00",
+  "turns": [
+    {
+      "turn_index": 1,
+      "started_at": "2026-09-15T23:57:08.398+07:00",
+      "user": "Test transport",
+      "status": "answered",
+      "assistant_text": "{\"intent\": \"transport_search\", \"action\": \"answer\", \"reply\": \"Test result\", \"evidence_ids\": [\"TR-HAN-DAD-F01\"]}",
+      "rounds": [
+        {
+          "round": 1,
+          "assistant_text": null,
+          "tool_calls": [
+            {
+              "name": "search_transport",
+              "args": {
+                "origin": "HAN",
+                "destination": "DAD",
+                "travel_date": "2026-10-20",
+                "passengers": 2,
+                "mode": "flight"
+              }
+            }
+          ],
+          "tool_results": [
+            {
+              "tool": "search_transport",
+              "args": {
+                "origin": "HAN",
+                "destination": "DAD",
+                "travel_date": "2026-10-20",
+                "passengers": 2,
+                "mode": "flight"
+              },
+              "result": {
+                "tool": "search_transport",
+                "fictional": true,
+                "currency": "VND",
+                "source": "local_mock_travel_data",
+                "travel_date": "2026-10-20",
+                "notice": "The date is request context; this static mock data has no date-specific inventory.",
+                "results": [
+                  {
+                    "option_id": "TR-HAN-DAD-F01",
+                    "origin": "HAN",
+                    "destination": "DAD",
+                    "mode": "flight",
+                    "depart_time": "08:00",
+                    "duration_minutes": 85,
+                    "price": 1450000,
+                    "seats": 8
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "assistant_text": "{\"intent\": \"transport_search\", \"action\": \"answer\", \"reply\": \"Test result\", \"evidence_ids\": [\"TR-HAN-DAD-F01\"]}",
+          "tool_calls": [],
+          "tool_results": []
+        }
+      ],
+      "tool_events": [
+        {
+          "tool": "search_transport",
+          "args": {
+            "origin": "HAN",
+            "destination": "DAD",
+            "travel_date": "2026-10-20",
+            "passengers": 2,
+            "mode": "flight"
+          },
+          "result": {
+            "tool": "search_transport",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "travel_date": "2026-10-20",
+            "notice": "The date is request context; this static mock data has no date-specific inventory.",
+            "results": [
+              {
+                "option_id": "TR-HAN-DAD-F01",
+                "origin": "HAN",
+                "destination": "DAD",
+                "mode": "flight",
+                "depart_time": "08:00",
+                "duration_minutes": 85,
+                "price": 1450000,
+                "seats": 8
+              }
+            ]
+          }
+        }
+      ],
+      "structured_assistant": {
+        "intent": "transport_search",
+        "action": "answer",
+        "reply": "Test result",
+        "evidence_ids": [
+          "TR-HAN-DAD-F01"
+        ]
+      },
+      "ended_at": "2026-09-15T23:57:08.398+07:00"
+    }
+  ]
+}

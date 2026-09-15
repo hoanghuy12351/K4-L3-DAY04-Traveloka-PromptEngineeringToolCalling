@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Local AI Travel Planner lab evidence interface">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="application-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <p class="eyebrow">Day04 tool-calling evidence</p>
+          <h1>AI Travel Planner</h1>
+          <p class="fictional-badge">Dữ liệu du lịch mô phỏng cho bài lab</p>
+        </div>
+        <div class="header-runtime" aria-label="Runtime summary">
+          <span class="meta-chip"><span>Provider</span><strong id="header-provider">Loading</strong></span>
+          <span class="meta-chip"><span>Model</span><strong id="header-model">Loading</strong></span>
+          <span class="meta-chip"><span>Version</span><strong id="header-version">Loading</strong></span>
+          <span class="status-badge status-idle" id="session-status" role="status">Sẵn sàng</span>
+          <button class="secondary-button" id="new-conversation" type="button">Cuộc trò chuyện mới</button>
+        </div>
+      </header>
+
+      <section class="notice" aria-label="Static data disclaimer">
+        Ứng dụng dùng dữ liệu du lịch mô phỏng cố định. Giá, lịch trình và tình trạng còn chỗ không phải dữ liệu trực tiếp.
+      </section>
+
+      <div id="app-error" class="app-error" role="alert" hidden></div>
+
+      <div class="workspace">
+        <section class="chat-column" aria-label="Travel planning chat">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Conversation</p>
+              <h2>Trò chuyện lập kế hoạch</h2>
+            </div>
+            <span class="conversation-id" id="conversation-id">Đang tạo phiên</span>
+          </div>
+
+          <div id="messages" class="messages" aria-live="polite">
+            <article class="message assistant-message welcome-message">
+              <p class="message-role">Assistant</p>
+              <p>Hãy nêu yêu cầu chuyến đi. Mọi lần gọi công cụ và kết quả thực tế sẽ hiện ở khung bên phải.</p>
+            </article>
+          </div>
+
+          <form id="chat-form" class="composer">
+            <label for="chat-input">Yêu cầu du lịch</label>
+            <textarea id="chat-input" rows="3" placeholder="Ví dụ: Tìm chuyến bay từ Hà Nội đến Đà Nẵng ngày 2026-10-20 cho 2 người."></textarea>
+            <div class="composer-actions">
+              <span class="input-hint">Enter để gửi. Shift + Enter để xuống dòng.</span>
+              <button id="send-button" class="primary-button" type="submit">Gửi</button>
+            </div>
+          </form>
+
+          <section class="scenario-section scenario-panel" aria-label="Demo scenarios">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Demo</p>
+                <h2>Câu hỏi mẫu</h2>
+              </div>
+              <label class="inline-filter-label" for="scenario-filter">Nhóm câu hỏi</label>
+              <select id="scenario-filter"></select>
+            </div>
+            <div id="scenario-list" class="scenario-list"></div>
+            <div id="scenario-detail" class="scenario-detail">
+              <p>Chọn một tình huống, sau đó nạp từng lượt câu hỏi vào ô chat.</p>
+            </div>
+            <div class="button-group scenario-actions">
+              <button id="load-scenario" class="secondary-button" type="button" disabled>Nạp câu hỏi</button>
+              <button id="next-scenario-turn" class="secondary-button" type="button" disabled>Lượt tiếp theo</button>
+              <button id="restart-scenario" class="secondary-button" type="button" disabled>Làm lại tình huống</button>
+            </div>
+          </section>
+        </section>
+
+        <aside class="inspector" aria-label="Runtime and tool inspector">
+          <section class="inspector-section trace-section">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Actual runtime trace</p>
+                <h2>Tool calls and results</h2>
+              </div>
+            </div>
+            <p class="trace-empty" id="trace-empty">Các công cụ được gọi trong phiên này sẽ xuất hiện tại đây.</p>
+            <div id="tool-traces" class="tool-traces"></div>
+          </section>
+
+          <section class="inspector-section runtime-section">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Runtime</p>
+                <h2>Thông tin phiên</h2>
+              </div>
+            </div>
+            <dl id="runtime-meta" class="metadata-list friendly-meta"></dl>
+            <details class="technical-details">
+              <summary>Chi tiết kỹ thuật</summary>
+              <dl id="advanced-runtime-meta" class="metadata-list advanced-meta"></dl>
+              <div id="tool-registry" class="tool-registry"></div>
+            </details>
+          </section>
+
+          <section class="inspector-section transcript-section">
+            <div class="section-heading compact-heading">
+              <div>
+                <p class="eyebrow">Evidence</p>
+                <h2>Bản ghi hội thoại</h2>
+              </div>
+            </div>
+            <dl id="transcript-meta" class="metadata-list friendly-meta"></dl>
+            <div class="button-group">
+              <button id="view-transcript" class="secondary-button" type="button">Xem JSON</button>
+              <button id="download-transcript" class="secondary-button" type="button">Tải JSON</button>
+              <button id="copy-transcript-id" class="secondary-button" type="button">Sao chép mã</button>
+              <button id="reset-conversation" class="danger-button" type="button">Xóa phiên hiện tại</button>
+            </div>
+            <details class="technical-details">
+              <summary>Vị trí tệp</summary>
+              <dl id="advanced-transcript-meta" class="metadata-list advanced-meta"></dl>
+            </details>
+            <pre id="transcript-viewer" class="transcript-viewer" hidden></pre>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

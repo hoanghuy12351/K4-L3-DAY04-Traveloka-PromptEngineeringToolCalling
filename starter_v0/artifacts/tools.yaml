@@ -10,11 +10,16 @@ tools:
       required: [question]
 
   - name: search_destinations
-    description: Recommend fictional local destinations by interest and budget. Use canonical city codes in results; optionally filter by region.
+    description: Recommend fictional local destinations by interest and budget. Normalize every interest to a canonical English value, put all requested interests in one array, and use canonical city codes in results. Optionally filter by region.
     parameters:
       type: object
       properties:
-        interests: {type: array, items: {type: string}, description: "Travel interests such as beach, family, nature, or food."}
+        interests:
+          type: array
+          items:
+            type: string
+            enum: [beach, family, nature, food, culture, history, nightlife, city, photography, relaxation]
+          description: "All requested interests in one array using canonical English values: biển=beach, gia đình=family, thiên nhiên=nature, ẩm thực=food, văn hóa=culture, lịch sử=history, cuộc sống về đêm=nightlife, đô thị=city, chụp ảnh=photography, nghỉ dưỡng=relaxation."
         budget_level: {type: string, enum: [low, medium, high], description: Requested budget level.}
         top_k: {type: integer, default: 5, minimum: 1, description: Maximum result count.}
         region: {type: string, enum: [north, south, central, central_highlands], description: Optional destination region.}
@@ -29,7 +34,7 @@ tools:
         destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
         travel_date: {type: string, description: Requested travel date in YYYY-MM-DD.}
         passengers: {type: integer, minimum: 1, description: Number of travelers.}
-        mode: {type: string, enum: [all, flight, train, bus], default: all, description: Transport mode.}
+        mode: {type: string, enum: [all, flight, train, bus], default: all, description: "Transport mode. When the user explicitly mentions máy bay or flight, tàu or train, or xe khách or bus, include mode=flight, train, or bus instead of omitting this argument."}
         max_price: {type: integer, minimum: 0, description: Optional maximum fictional per-person price in VND.}
         top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
       required: [origin, destination, travel_date, passengers]
@@ -50,12 +55,17 @@ tools:
       required: [destination, check_in, check_out, guests]
 
   - name: search_attractions
-    description: Search fictional local attractions by canonical destination code and interests.
+    description: Search fictional local attractions by canonical destination code. Make one call per destination and put all requested interests in one canonical English array; do not split interests into separate calls.
     parameters:
       type: object
       properties:
         destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
-        interests: {type: array, items: {type: string}, description: Travel interests to match.}
+        interests:
+          type: array
+          items:
+            type: string
+            enum: [beach, family, nature, food, culture, history, nightlife, city, photography, relaxation]
+          description: "All interests to match in one array using canonical English values: biển=beach, gia đình=family, thiên nhiên=nature, ẩm thực=food, văn hóa=culture, lịch sử=history, cuộc sống về đêm=nightlife, đô thị=city, chụp ảnh=photography, nghỉ dưỡng=relaxation."
         max_price: {type: integer, minimum: 0, description: Optional maximum fictional attraction price in VND.}
         top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
       required: [destination, interests]
@@ -75,7 +85,7 @@ tools:
       required: [transport_cost_per_person, hotel_price_per_night, nights, attraction_cost_per_person, daily_food_cost_per_person, days, travelers]
 
   - name: build_itinerary
-    description: Build a fictional day-by-day itinerary using only local attraction records and canonical destination codes.
+    description: Build a fictional day-by-day itinerary using only local attraction records and canonical destination codes. Put all requested interests in one canonical English array.
     parameters:
       type: object
       properties:
@@ -83,7 +93,12 @@ tools:
         start_date: {type: string, description: Itinerary start date in YYYY-MM-DD.}
         days: {type: integer, minimum: 1, description: Number of itinerary days.}
         travelers: {type: integer, minimum: 1, description: Number of travelers.}
-        interests: {type: array, items: {type: string}, description: "Travel interests such as beach, family, nature, or food."}
+        interests:
+          type: array
+          items:
+            type: string
+            enum: [beach, family, nature, food, culture, history, nightlife, city, photography, relaxation]
+          description: "All itinerary interests in one array using canonical English values: biển=beach, gia đình=family, thiên nhiên=nature, ẩm thực=food, văn hóa=culture, lịch sử=history, cuộc sống về đêm=nightlife, đô thị=city, chụp ảnh=photography, nghỉ dưỡng=relaxation."
         daily_budget: {type: integer, minimum: 0, description: Optional maximum daily fictional budget in VND.}
       required: [destination, start_date, days, travelers, interests]
 
@@ -93,7 +108,7 @@ tools:
       type: object
       properties:
         booking_type: {type: string, enum: [hotel, transport], description: Type of local mock record to request.}
-        option_id: {type: string, description: Local hotel_id or transport option_id.}
+        option_id: {type: string, description: "Copy the complete local hotel_id or transport option_id exactly, including every prefix and segment, for example HT-DAD-01 or TR-SGN-PQC-F01. Never shorten it to the final segment such as F01."}
         start_date: {type: string, description: Start or travel date in YYYY-MM-DD.}
         end_date: {type: string, description: End date in YYYY-MM-DD; required for hotel requests.}
         travelers: {type: integer, minimum: 1, description: Number of travelers or hotel guests.}

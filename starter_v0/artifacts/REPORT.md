@@ -50,8 +50,8 @@ total_cases`, và tool result error đã được review thủ công.
 
 | Version | Prompt/tool change | Hypothesis | Metric | Before | After | Run file |
 |---|---|---|---|---:|---:|---|
-| v0 | baseline |  |  |  |  |  |
-| v1 |  |  |  |  |  |  |
+| v0 | Travel Planner baseline | Prompt và tool ban đầu tạo mốc đo có thể lặp lại | case accuracy |  | 0.6333 | [run](../runs/v0_B_base_openai_20260915T200022454664.json) |
+| v1 | Thêm interest enum, hướng dẫn mode và giữ nguyên option ID trong `tools.yaml` | Schema rõ hơn sẽ giảm lỗi `wrong_arg_value` | case accuracy | 0.6333 | 0.7667 | [run](../runs/v1_B_base_openai_20260915T200611852550.json) |
 | v2 |  |  |  |  |  |  |
 | v3 |  |  |  |  |  |  |
 
@@ -59,7 +59,13 @@ total_cases`, và tool result error đã được review thủ công.
 
 | Case ID | Failure type | Actual calls | What failed | Fix |
 |---|---|---|---|---|
-|  |  |  |  |  |
+| T02_transport_search | wrong_arg_value | `search_transport` thiếu `mode` | Bỏ sót `mode=flight` dù người dùng nêu rõ | Xem xét siết điều kiện truyền `mode` ở vòng sau |
+| T04_attraction_interest | wrong_arg_value | Gọi `search_attractions` ba lần | Một lần gọi đúng nhưng thêm hai lần gọi từng sở thích | Giữ toàn bộ sở thích trong một mảng và chỉ gọi một lần |
+| T08_missing_origin | missing_info | `search_transport(origin=SGN, ...)` | Tự đoán điểm xuất phát | V2 kiểm tra đủ trường bắt buộc và gọi `clarify` |
+| T09_missing_hotel_dates | missing_info | `search_hotels` với ngày tự tạo | Tự tạo ngày nhận/trả phòng | V2 cấm giá trị mặc định cho ngày và gọi `clarify` |
+| T14_parallel_trip_search | wrong_tool | Ba tool đúng nhưng transport thiếu `mode` | Payload phương tiện chưa đủ kỳ vọng | Xem xét siết điều kiện truyền `mode` ở vòng sau |
+| T18_ambiguous_budget | missing_info | `search_hotels(max_price_per_night=500000)` | Tự đổi từ "rẻ" thành số tiền | V2 yêu cầu ngân sách số bằng `clarify` |
+| TM06_confirmation_invalidated | wrong_boundary | `create_booking_request(confirmed=true)` | Dùng lại xác nhận cũ sau khi đổi khách sạn | V3 bắt buộc xác nhận lại payload đã thay đổi |
 
 ## B3. Team eval cases
 

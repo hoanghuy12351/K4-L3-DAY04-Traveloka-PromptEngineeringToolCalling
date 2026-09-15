@@ -14,7 +14,7 @@ tools:
     parameters:
       type: object
       properties:
-        interests: {type: array, items: {type: string}, description: Travel interests such as beach, family, nature, or food.}
+        interests: {type: array, items: {type: string}, description: "Travel interests such as beach, family, nature, or food."}
         budget_level: {type: string, enum: [low, medium, high], description: Requested budget level.}
         top_k: {type: integer, default: 5, minimum: 1, description: Maximum result count.}
         region: {type: string, enum: [north, south, central, central_highlands], description: Optional destination region.}
@@ -25,8 +25,8 @@ tools:
     parameters:
       type: object
       properties:
-        origin: {type: string, description: Canonical origin city code: HAN, SGN, DAD, DLI, or PQC.}
-        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        origin: {type: string, description: "Canonical origin city code: HAN, SGN, DAD, DLI, or PQC."}
+        destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
         travel_date: {type: string, description: Requested travel date in YYYY-MM-DD.}
         passengers: {type: integer, minimum: 1, description: Number of travelers.}
         mode: {type: string, enum: [all, flight, train, bus], default: all, description: Transport mode.}
@@ -39,7 +39,7 @@ tools:
     parameters:
       type: object
       properties:
-        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
         check_in: {type: string, description: Check-in date in YYYY-MM-DD.}
         check_out: {type: string, description: Check-out date in YYYY-MM-DD.}
         guests: {type: integer, minimum: 1, description: Number of guests.}
@@ -54,7 +54,7 @@ tools:
     parameters:
       type: object
       properties:
-        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
         interests: {type: array, items: {type: string}, description: Travel interests to match.}
         max_price: {type: integer, minimum: 0, description: Optional maximum fictional attraction price in VND.}
         top_k: {type: integer, minimum: 1, default: 10, description: Maximum result count.}
@@ -79,11 +79,11 @@ tools:
     parameters:
       type: object
       properties:
-        destination: {type: string, description: Canonical destination city code: HAN, SGN, DAD, DLI, or PQC.}
+        destination: {type: string, description: "Canonical destination city code: HAN, SGN, DAD, DLI, or PQC."}
         start_date: {type: string, description: Itinerary start date in YYYY-MM-DD.}
         days: {type: integer, minimum: 1, description: Number of itinerary days.}
         travelers: {type: integer, minimum: 1, description: Number of travelers.}
-        interests: {type: array, items: {type: string}, description: Interests to prioritize.}
+        interests: {type: array, items: {type: string}, description: "Travel interests such as beach, family, nature, or food."}
         daily_budget: {type: integer, minimum: 0, description: Optional maximum daily fictional budget in VND.}
       required: [destination, start_date, days, travelers, interests]
 

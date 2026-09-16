@@ -1,0 +1,990 @@
+{
+  "run_id": "v3_B_group_openai_20260915T233951056684",
+  "version": "v3",
+  "artifact_version": "v3+p6850ec08cdb5+t080ff8930e75",
+  "prompt_hash": "6850ec08cdb57c8d5d7bdcd54a7a1fe9199ae0f6566cd6b8667a0aa803c32474",
+  "tools_hash": "080ff8930e757c9ee6ae05819939dfbcc1dc68060720ba5e34ca7c6eff20768e",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openai",
+  "model": "gpt-4o-mini",
+  "system_prompt": "C:\\ai-day3\\ai-day4-lab2\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\system_prompt.md",
+  "tools": "C:\\ai-day3\\ai-day4-lab2\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\artifacts\\tools.yaml",
+  "eval_cases": "data\\eval_group.json",
+  "delay_seconds": 0.0,
+  "max_retries": 3,
+  "retry_base_seconds": 15.0,
+  "dataset_id": "day04_v3_travel_group",
+  "dataset_role": "group",
+  "description": "Ten original Travel Planner evaluation cases written by the team: five single-turn and five multi-turn cases.",
+  "generated_at": "2026-09-15T23:39:51",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 9,
+    "case_accuracy": 0.9,
+    "tool_routing_accuracy": 1.0,
+    "argument_accuracy": 0.9,
+    "multiturn_accuracy": 0.8,
+    "failure_counts": {
+      "wrong_arg_value": 1
+    },
+    "observed_mismatch_counts": {
+      "wrong_arg_value": 1
+    }
+  },
+  "results": [
+    {
+      "id": "TG01_northern_culture_destination",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "destination_filters",
+        "difficulty": "medium",
+        "what_it_tests": "Chuẩn hóa sở thích, vùng, ngân sách và giới hạn kết quả trong một lời gọi."
+      },
+      "input": "Gợi ý tối đa 3 điểm đến miền Bắc, ngân sách thấp, phù hợp khám phá lịch sử và văn hóa.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_destinations",
+            "args": {
+              "interests": [
+                "history",
+                "culture"
+              ],
+              "budget_level": "low",
+              "region": "north",
+              "top_k": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_destinations",
+            "args": {
+              "interests": [
+                "history",
+                "culture"
+              ],
+              "budget_level": "low",
+              "top_k": 3,
+              "region": "north"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_destinations",
+          "args": {
+            "interests": [
+              "history",
+              "culture"
+            ],
+            "budget_level": "low",
+            "top_k": 3,
+            "region": "north"
+          },
+          "result": {
+            "tool": "search_destinations",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "results": [
+              {
+                "code": "HAN",
+                "city": "Hà Nội",
+                "region": "north",
+                "recommended_days": [
+                  3,
+                  5
+                ],
+                "budget_levels": [
+                  "low",
+                  "medium",
+                  "high"
+                ],
+                "interests": [
+                  "culture",
+                  "food",
+                  "history",
+                  "city"
+                ],
+                "estimated_daily_local_cost": 850000,
+                "summary": "Phù hợp khám phá phố cổ, ẩm thực và di sản đô thị."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TG02_bus_with_price_limit",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "transport_constraints",
+        "difficulty": "medium",
+        "what_it_tests": "Giữ đầy đủ loại phương tiện, ngày, số người và trần giá."
+      },
+      "input": "Tìm xe khách từ Đà Nẵng đến Đà Lạt ngày 2026-11-20 cho 3 người, giá tối đa 500000 đồng mỗi người.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "DAD",
+              "destination": "DLI",
+              "travel_date": "2026-11-20",
+              "passengers": 3,
+              "mode": "bus",
+              "max_price": 500000
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "DAD",
+              "destination": "DLI",
+              "travel_date": "2026-11-20",
+              "passengers": 3,
+              "mode": "bus",
+              "max_price": 500000
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_transport",
+          "args": {
+            "origin": "DAD",
+            "destination": "DLI",
+            "travel_date": "2026-11-20",
+            "passengers": 3,
+            "mode": "bus",
+            "max_price": 500000
+          },
+          "result": {
+            "tool": "search_transport",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "travel_date": "2026-11-20",
+            "notice": "The date is request context; this static mock data has no date-specific inventory.",
+            "results": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "TG03_hotel_amenity_rating",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "hotel_filters",
+        "difficulty": "medium",
+        "what_it_tests": "Truyền đồng thời ngày, khách, giá, điểm và tiện ích khách sạn."
+      },
+      "input": "Tìm khách sạn ở Phú Quốc từ 2026-12-05 đến 2026-12-08 cho 2 khách, tối đa 2500000 đồng mỗi đêm, điểm từ 4.5 và có tiện ích pool.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "PQC",
+              "check_in": "2026-12-05",
+              "check_out": "2026-12-08",
+              "guests": 2,
+              "max_price_per_night": 2500000,
+              "min_rating": 4.5,
+              "amenities": [
+                "pool"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "PQC",
+              "check_in": "2026-12-05",
+              "check_out": "2026-12-08",
+              "guests": 2,
+              "max_price_per_night": 2500000,
+              "min_rating": 4.5,
+              "amenities": [
+                "pool"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_hotels",
+          "args": {
+            "destination": "PQC",
+            "check_in": "2026-12-05",
+            "check_out": "2026-12-08",
+            "guests": 2,
+            "max_price_per_night": 2500000,
+            "min_rating": 4.5,
+            "amenities": [
+              "pool"
+            ]
+          },
+          "result": {
+            "tool": "search_hotels",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "check_in": "2026-12-05",
+            "check_out": "2026-12-08",
+            "notice": "Dates are request context; availability is a static fictional dataset field.",
+            "results": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "TG04_complete_budget",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "budget_calculation",
+        "difficulty": "medium",
+        "what_it_tests": "Dùng công cụ tính ngân sách với đủ bảy thành phần, không tự tính."
+      },
+      "input": "Tính ngân sách chuyến 4 ngày 3 đêm cho 3 người: phương tiện 1800000 mỗi người, phòng 1400000 mỗi đêm, tham quan 600000 mỗi người và ăn uống 450000 mỗi người mỗi ngày.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "calculate_trip_budget",
+            "args": {
+              "transport_cost_per_person": 1800000,
+              "hotel_price_per_night": 1400000,
+              "nights": 3,
+              "attraction_cost_per_person": 600000,
+              "daily_food_cost_per_person": 450000,
+              "days": 4,
+              "travelers": 3
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "calculate_trip_budget",
+            "args": {
+              "transport_cost_per_person": 1800000,
+              "hotel_price_per_night": 1400000,
+              "nights": 3,
+              "attraction_cost_per_person": 600000,
+              "daily_food_cost_per_person": 450000,
+              "days": 4,
+              "travelers": 3
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "calculate_trip_budget",
+          "args": {
+            "transport_cost_per_person": 1800000,
+            "hotel_price_per_night": 1400000,
+            "nights": 3,
+            "attraction_cost_per_person": 600000,
+            "daily_food_cost_per_person": 450000,
+            "days": 4,
+            "travelers": 3
+          },
+          "result": {
+            "tool": "calculate_trip_budget",
+            "fictional": true,
+            "currency": "VND",
+            "travelers": 3,
+            "days": 4,
+            "nights": 3,
+            "breakdown": {
+              "transport": 5400000,
+              "hotel": 4200000,
+              "attractions": 1800000,
+              "food": 5400000
+            },
+            "total": 16800000
+          }
+        }
+      ]
+    },
+    {
+      "id": "TG05_booking_requires_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "booking_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Dừng ở bước xác nhận khi người dùng nói rõ chưa xác nhận."
+      },
+      "input": "Tạo yêu cầu đặt HT-PQC-01 từ 2026-12-05 đến 2026-12-08 cho 2 người; tôi chưa xác nhận nội dung này.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có xác nhận yêu cầu đặt phòng khách sạn HT-PQC-01 từ ngày 2026-12-05 đến 2026-12-08 cho 2 người không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có xác nhận yêu cầu đặt phòng khách sạn HT-PQC-01 từ ngày 2026-12-05 đến 2026-12-08 cho 2 người không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có xác nhận yêu cầu đặt phòng khách sạn HT-PQC-01 từ ngày 2026-12-05 đến 2026-12-08 cho 2 người không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "TGM01_complete_hotel_constraints",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_constraint_completion",
+        "difficulty": "hard",
+        "what_it_tests": "Tích lũy trường bắt buộc và bộ lọc qua ba lượt."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm khách sạn ở Đà Lạt cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Nhận phòng 2026-11-15, trả phòng 2026-11-18, tối đa 1500000 đồng mỗi đêm."
+        },
+        {
+          "role": "user",
+          "content": "Thêm yêu cầu có wifi rồi tìm giúp tôi."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DLI",
+              "check_in": "2026-11-15",
+              "check_out": "2026-11-18",
+              "guests": 2,
+              "max_price_per_night": 1500000,
+              "amenities": [
+                "wifi"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "search_hotels",
+            "args": {
+              "destination": "DLI",
+              "check_in": "2026-11-15",
+              "check_out": "2026-11-18",
+              "guests": 2,
+              "amenities": [
+                "wifi"
+              ],
+              "max_price_per_night": 1500000
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "search_hotels",
+          "args": {
+            "destination": "DLI",
+            "check_in": "2026-11-15",
+            "check_out": "2026-11-18",
+            "guests": 2,
+            "amenities": [
+              "wifi"
+            ],
+            "max_price_per_night": 1500000
+          },
+          "result": {
+            "tool": "search_hotels",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "check_in": "2026-11-15",
+            "check_out": "2026-11-18",
+            "notice": "Dates are request context; availability is a static fictional dataset field.",
+            "results": [
+              {
+                "hotel_id": "HT-DLI-01",
+                "destination": "DLI",
+                "name": "Đồi Thông Sample House",
+                "price_per_night": 780000,
+                "max_guests": 2,
+                "rating": 4.2,
+                "amenities": [
+                  "wifi",
+                  "garden"
+                ],
+                "available": true
+              },
+              {
+                "hotel_id": "HT-DLI-02",
+                "destination": "DLI",
+                "name": "Hồ Xuân Hương Demo Stay",
+                "price_per_night": 1350000,
+                "max_guests": 3,
+                "rating": 4.5,
+                "amenities": [
+                  "wifi",
+                  "breakfast",
+                  "lake_view"
+                ],
+                "available": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TGM02_latest_transport_corrections",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_latest_values",
+        "difficulty": "hard",
+        "what_it_tests": "Giá trị sửa mới nhất phải thay điểm đi, ngày và số hành khách cũ."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tìm chuyến bay từ Hà Nội đến Đà Nẵng ngày 2026-10-21 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Sửa điểm đi thành TP. Hồ Chí Minh."
+        },
+        {
+          "role": "user",
+          "content": "Sửa tiếp ngày đi thành 2026-10-22 và số hành khách thành 4 rồi tìm."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "SGN",
+              "destination": "DAD",
+              "travel_date": "2026-10-22",
+              "passengers": 4,
+              "mode": "flight"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": false,
+        "routing_correct": true,
+        "args_correct": false,
+        "actual_tool_calls": [
+          {
+            "name": "search_transport",
+            "args": {
+              "origin": "SGN",
+              "destination": "DAD",
+              "travel_date": "2026-10-22",
+              "passengers": 4
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": "wrong_arg_value",
+        "failure_type": "wrong_arg_value",
+        "failures": [
+          "mode: expected 'flight', got None"
+        ]
+      },
+      "tool_results": [
+        {
+          "tool": "search_transport",
+          "args": {
+            "origin": "SGN",
+            "destination": "DAD",
+            "travel_date": "2026-10-22",
+            "passengers": 4
+          },
+          "result": {
+            "tool": "search_transport",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "travel_date": "2026-10-22",
+            "notice": "The date is request context; this static mock data has no date-specific inventory.",
+            "results": [
+              {
+                "option_id": "TR-SGN-DAD-B01",
+                "origin": "SGN",
+                "destination": "DAD",
+                "mode": "bus",
+                "depart_time": "18:00",
+                "duration_minutes": 1020,
+                "price": 520000,
+                "seats": 20
+              },
+              {
+                "option_id": "TR-SGN-DAD-F01",
+                "origin": "SGN",
+                "destination": "DAD",
+                "mode": "flight",
+                "depart_time": "09:15",
+                "duration_minutes": 80,
+                "price": 1350000,
+                "seats": 10
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TGM03_change_itinerary_destination",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_itinerary_update",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi điểm đến nhưng vẫn giữ ngày, số ngày, số người và bổ sung sở thích."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Lập lịch trình Phú Quốc 4 ngày từ 2026-12-05 cho 2 người, thích biển."
+        },
+        {
+          "role": "user",
+          "content": "Đổi điểm đến thành Đà Nẵng."
+        },
+        {
+          "role": "user",
+          "content": "Thêm sở thích văn hóa và tạo lịch trình mới."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "DAD",
+              "start_date": "2026-12-05",
+              "days": 4,
+              "travelers": 2,
+              "interests": [
+                "beach",
+                "culture"
+              ]
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "build_itinerary",
+            "args": {
+              "destination": "DAD",
+              "start_date": "2026-12-05",
+              "days": 4,
+              "travelers": 2,
+              "interests": [
+                "beach",
+                "culture"
+              ]
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_arg_value",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "build_itinerary",
+          "args": {
+            "destination": "DAD",
+            "start_date": "2026-12-05",
+            "days": 4,
+            "travelers": 2,
+            "interests": [
+              "beach",
+              "culture"
+            ]
+          },
+          "result": {
+            "tool": "build_itinerary",
+            "fictional": true,
+            "currency": "VND",
+            "source": "local_mock_travel_data",
+            "destination": "DAD",
+            "travelers": 2,
+            "notice": "This is a fictional classroom itinerary built only from local attraction records.",
+            "itinerary": [
+              {
+                "day": 1,
+                "date": "2026-12-05",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-01",
+                    "destination": "DAD",
+                    "name": "Bãi biển Mỹ Khê Demo",
+                    "interests": [
+                      "beach",
+                      "family",
+                      "relaxation"
+                    ],
+                    "duration_hours": 4,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              },
+              {
+                "day": 2,
+                "date": "2026-12-06",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-02",
+                    "destination": "DAD",
+                    "name": "Bảo tàng Chăm Sample",
+                    "interests": [
+                      "culture",
+                      "history"
+                    ],
+                    "duration_hours": 2,
+                    "price": 70000
+                  }
+                ],
+                "attraction_cost_for_travelers": 140000
+              },
+              {
+                "day": 3,
+                "date": "2026-12-07",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-01",
+                    "destination": "DAD",
+                    "name": "Bãi biển Mỹ Khê Demo",
+                    "interests": [
+                      "beach",
+                      "family",
+                      "relaxation"
+                    ],
+                    "duration_hours": 4,
+                    "price": 0
+                  }
+                ],
+                "attraction_cost_for_travelers": 0
+              },
+              {
+                "day": 4,
+                "date": "2026-12-08",
+                "attractions": [
+                  {
+                    "attraction_id": "AT-DAD-02",
+                    "destination": "DAD",
+                    "name": "Bảo tàng Chăm Sample",
+                    "interests": [
+                      "culture",
+                      "history"
+                    ],
+                    "duration_hours": 2,
+                    "price": 70000
+                  }
+                ],
+                "attraction_cost_for_travelers": 140000
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "TGM04_exact_transport_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_exact_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận rõ payload không đổi cho phép tạo yêu cầu mô phỏng."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi muốn đặt chuyến TR-HAN-DAD-F01 ngày 2026-10-21 cho 3 người."
+        },
+        {
+          "role": "user",
+          "content": "Nhắc lại giúp tôi: TR-HAN-DAD-F01, ngày 2026-10-21, 3 người."
+        },
+        {
+          "role": "user",
+          "content": "Đúng, tôi xác nhận chính xác nội dung vừa nêu; hãy tạo yêu cầu."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "booking_type": "transport",
+              "option_id": "TR-HAN-DAD-F01",
+              "start_date": "2026-10-21",
+              "travelers": 3,
+              "confirmed": true
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "create_booking_request",
+            "args": {
+              "booking_type": "transport",
+              "option_id": "TR-HAN-DAD-F01",
+              "start_date": "2026-10-21",
+              "travelers": 3,
+              "confirmed": true
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "create_booking_request",
+          "args": {
+            "booking_type": "transport",
+            "option_id": "TR-HAN-DAD-F01",
+            "start_date": "2026-10-21",
+            "travelers": 3,
+            "confirmed": true
+          },
+          "result": {
+            "tool": "create_booking_request",
+            "status": "created_mock_request",
+            "request_id": "MOCK-28933E4058",
+            "message": "Simulated request created. No real reservation or payment was made.",
+            "fictional": true,
+            "path": "C:\\ai-day3\\ai-day4-lab2\\K4-L3B-Day04-Prompt-Engineering-Tool-Calling-Labs\\starter_v0\\booking_requests\\MOCK-28933E4058.json",
+            "request": {
+              "request_id": "MOCK-28933E4058",
+              "created_at": "2026-09-15T16:39:49.722568+00:00",
+              "booking_type": "transport",
+              "option_id": "TR-HAN-DAD-F01",
+              "start_date": "2026-10-21",
+              "end_date": null,
+              "travelers": 3,
+              "confirmed": true,
+              "fictional": true,
+              "source": "local_mock_travel_data"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "TGM05_date_change_invalidates_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirmation_invalidation",
+        "difficulty": "hard",
+        "what_it_tests": "Thay đổi ngày sau xác nhận bắt buộc phải xác nhận lại."
+      },
+      "input": [
+        {
+          "role": "user",
+          "content": "Tôi xác nhận đặt HT-PQC-01 từ 2026-12-05 đến 2026-12-08 cho 2 người."
+        },
+        {
+          "role": "user",
+          "content": "Đổi ngày trả phòng thành 2026-12-09."
+        },
+        {
+          "role": "user",
+          "content": "Dùng xác nhận cũ để tạo yêu cầu với ngày mới."
+        }
+      ],
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "result": {
+        "passed": true,
+        "routing_correct": true,
+        "args_correct": true,
+        "actual_tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "question": "Bạn có xác nhận rằng bạn muốn tạo yêu cầu đặt phòng cho khách sạn HT-PQC-01 từ 2026-12-05 đến 2026-12-09 cho 2 người không?",
+              "response_type": "yes_no"
+            }
+          }
+        ],
+        "actual_text": null,
+        "case_failure_type": "wrong_boundary",
+        "observed_mismatch": null,
+        "failure_type": null,
+        "failures": []
+      },
+      "tool_results": [
+        {
+          "tool": "clarify",
+          "args": {
+            "question": "Bạn có xác nhận rằng bạn muốn tạo yêu cầu đặt phòng cho khách sạn HT-PQC-01 từ 2026-12-05 đến 2026-12-09 cho 2 người không?",
+            "response_type": "yes_no"
+          },
+          "result": {
+            "tool": "clarify",
+            "question": "Bạn có xác nhận rằng bạn muốn tạo yêu cầu đặt phòng cho khách sạn HT-PQC-01 từ 2026-12-05 đến 2026-12-09 cho 2 người không?",
+            "response_type": "yes_no",
+            "options": [],
+            "awaiting_user": true
+          }
+        }
+      ]
+    }
+  ]
+}
